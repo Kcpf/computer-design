@@ -1,0 +1,26 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+
+ENTITY decoderGeneric IS
+  PORT (
+    entrada : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+    saida : OUT STD_LOGIC_VECTOR(3 DOWNTO 0)
+  );
+END ENTITY;
+
+ARCHITECTURE comportamento OF decoderGeneric IS
+
+  CONSTANT NOP : STD_LOGIC_VECTOR(3 DOWNTO 0) := "0000";
+  CONSTANT LDA : STD_LOGIC_VECTOR(3 DOWNTO 0) := "0001";
+  CONSTANT SOMA : STD_LOGIC_VECTOR(3 DOWNTO 0) := "0010";
+  CONSTANT SUB : STD_LOGIC_VECTOR(3 DOWNTO 0) := "0011";
+  CONSTANT CLRA : STD_LOGIC_VECTOR(3 DOWNTO 0) := "1111";
+
+BEGIN
+  saida <= "0000" WHEN entrada = NOP ELSE
+    "0100" WHEN entrada = LDA ELSE
+    "1101" WHEN entrada = SOMA ELSE
+    "1100" WHEN entrada = SUB ELSE
+    "0010" WHEN entrada = CLRA ELSE
+    "0000"; -- NOP para os entradas Indefinidas
+END ARCHITECTURE;
