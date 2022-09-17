@@ -1,28 +1,28 @@
 v 4
-file . "test/Atv1_tb.vhd" "eeefa27ac2d70d73f89d91691f43e5c4c5450142" "20220901153424.212":
-  entity atv1_tb at 1( 0) + 0 on 179;
-  architecture test of atv1_tb at 7( 76) + 0 on 180;
-file . "src/Atv1.vhd" "51854b5637af19b73eac0c2e300d2587f72483ee" "20220901153423.987":
-  entity atv1 at 1( 0) + 0 on 163;
-  architecture arquitetura of atv1 at 15( 310) + 0 on 164;
-file . "src/ULASomaSub.vhd" "f2f17d38c9d3730444fdbebf393aa09eece89d61" "20220901153424.024":
-  entity ulasomasub at 1( 0) + 0 on 165;
-  architecture comportamento of ulasomasub at 14( 390) + 0 on 166;
-file . "src/decoderGeneric.vhd" "23c3101445fb0ea4502306d75aa5176e5e9fdf6a" "20220901153424.033":
-  entity decodergeneric at 1( 0) + 0 on 167;
-  architecture comportamento of decodergeneric at 11( 188) + 0 on 168;
-file . "src/memoriaRAM.vhd" "37360536791d2b3b5b878a91bca2fe3ee54cdc17" "20220901153424.049":
-  entity memoriaram at 1( 0) + 0 on 169;
-  architecture rtl of memoriaram at 20( 449) + 0 on 170;
-file . "src/memoriaROM.vhd" "432a1495af7900570da9393f5cfd72fb75a52a06" "20220901153424.068":
-  entity memoriarom at 1( 0) + 0 on 171;
-  architecture assincrona of memoriarom at 16( 312) + 0 on 172;
-file . "src/muxGenerico2x1.vhd" "1ae5acc7340b8c2fbea8b7f12bc25b97dd6a6716" "20220901153424.075":
-  entity muxgenerico2x1 at 1( 0) + 0 on 173;
-  architecture comportamento of muxgenerico2x1 at 14( 359) + 0 on 174;
-file . "src/registradorGenerico.vhd" "12b02d069d38e0ad2f6513b9949cc30d3a749a2a" "20220901153424.082":
-  entity registradorgenerico at 1( 0) + 0 on 175;
-  architecture comportamento of registradorgenerico at 16( 361) + 0 on 176;
-file . "src/somaConstante.vhd" "0bf1e8cbb525c233278bfb899bdb29eaf34030f6" "20220901153424.092":
-  entity somaconstante at 1( 0) + 0 on 177;
-  architecture comportamento of somaconstante at 16( 358) + 0 on 178;
+file . "test/Atv1_tb.vhd" "eeefa27ac2d70d73f89d91691f43e5c4c5450142" "20220901165550.689":
+  entity atv1_tb at 1( 0) + 0 on 197;
+  architecture test of atv1_tb at 7( 76) + 0 on 198;
+file . "src/Atv1.vhd" "51854b5637af19b73eac0c2e300d2587f72483ee" "20220901165550.441":
+  entity atv1 at 1( 0) + 0 on 181;
+  architecture arquitetura of atv1 at 15( 310) + 0 on 182;
+file . "src/ULASomaSub.vhd" "f2f17d38c9d3730444fdbebf393aa09eece89d61" "20220901165550.478":
+  entity ulasomasub at 1( 0) + 0 on 183;
+  architecture comportamento of ulasomasub at 14( 390) + 0 on 184;
+file . "src/decoderGeneric.vhd" "23c3101445fb0ea4502306d75aa5176e5e9fdf6a" "20220901165550.489":
+  entity decodergeneric at 1( 0) + 0 on 185;
+  architecture comportamento of decodergeneric at 11( 188) + 0 on 186;
+file . "src/memoriaRAM.vhd" "37360536791d2b3b5b878a91bca2fe3ee54cdc17" "20220901165550.508":
+  entity memoriaram at 1( 0) + 0 on 187;
+  architecture rtl of memoriaram at 20( 449) + 0 on 188;
+file . "src/memoriaROM.vhd" "432a1495af7900570da9393f5cfd72fb75a52a06" "20220901165550.528":
+  entity memoriarom at 1( 0) + 0 on 189;
+  architecture assincrona of memoriarom at 16( 312) + 0 on 190;
+file . "src/muxGenerico2x1.vhd" "1ae5acc7340b8c2fbea8b7f12bc25b97dd6a6716" "20220901165550.535":
+  entity muxgenerico2x1 at 1( 0) + 0 on 191;
+  architecture comportamento of muxgenerico2x1 at 14( 359) + 0 on 192;
+file . "src/registradorGenerico.vhd" "12b02d069d38e0ad2f6513b9949cc30d3a749a2a" "20220901165550.542":
+  entity registradorgenerico at 1( 0) + 0 on 193;
+  architecture comportamento of registradorgenerico at 16( 361) + 0 on 194;
+file . "src/somaConstante.vhd" "0bf1e8cbb525c233278bfb899bdb29eaf34030f6" "20220901165550.553":
+  entity somaconstante at 1( 0) + 0 on 195;
+  architecture comportamento of somaconstante at 16( 358) + 0 on 196;

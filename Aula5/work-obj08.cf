@@ -1,0 +1,37 @@
+v 4
+file . "src/registradorFlag.vhd" "9b28551341d946cea617d17b70b4de7c3ee1e28d" "20220917145120.499":
+  entity registradorflag at 1( 0) + 0 on 289;
+  architecture comportamento of registradorflag at 13( 216) + 0 on 290;
+file . "src/ULA.vhd" "a4312af80c30b80ae908bd21d842e93b705fb3ff" "20220917145120.421":
+  entity ula at 1( 0) + 0 on 277;
+  architecture comportamento of ula at 17( 422) + 0 on 278;
+file . "test/Atv1_tb.vhd" "eeefa27ac2d70d73f89d91691f43e5c4c5450142" "20220917145120.641":
+  entity atv1_tb at 1( 0) + 0 on 295;
+  architecture test of atv1_tb at 7( 76) + 0 on 296;
+file . "src/Atv1.vhd" "c63d6d8a0a1d9175521ace1f7ef90dee322b3473" "20220917145120.386":
+  entity atv1 at 1( 0) + 0 on 275;
+  architecture arquitetura of atv1 at 15( 310) + 0 on 276;
+file . "src/ULASomaSub.vhd" "f2f17d38c9d3730444fdbebf393aa09eece89d61" "20220906175157.005":
+  entity ulasomasub at 1( 0) + 0 on 69;
+  architecture comportamento of ulasomasub at 14( 390) + 0 on 70;
+file . "src/decoderGeneric.vhd" "e68380cea22dbabfcf574f5a3df179506c1656df" "20220917145120.444":
+  entity decodergeneric at 1( 0) + 0 on 279;
+  architecture comportamento of decodergeneric at 11( 189) + 0 on 280;
+file . "src/memoriaRAM.vhd" "37360536791d2b3b5b878a91bca2fe3ee54cdc17" "20220917145120.460":
+  entity memoriaram at 1( 0) + 0 on 281;
+  architecture rtl of memoriaram at 20( 449) + 0 on 282;
+file . "src/memoriaROM.vhd" "399396ddf490afa75109a27d39d14e210d0e322a" "20220917145120.478":
+  entity memoriarom at 1( 0) + 0 on 283;
+  architecture assincrona of memoriarom at 16( 312) + 0 on 284;
+file . "src/muxGenerico2x1.vhd" "1ae5acc7340b8c2fbea8b7f12bc25b97dd6a6716" "20220917145120.486":
+  entity muxgenerico2x1 at 1( 0) + 0 on 285;
+  architecture comportamento of muxgenerico2x1 at 14( 359) + 0 on 286;
+file . "src/registradorGenerico.vhd" "12b02d069d38e0ad2f6513b9949cc30d3a749a2a" "20220917145120.506":
+  entity registradorgenerico at 1( 0) + 0 on 291;
+  architecture comportamento of registradorgenerico at 16( 361) + 0 on 292;
+file . "src/somaConstante.vhd" "0bf1e8cbb525c233278bfb899bdb29eaf34030f6" "20220917145120.516":
+  entity somaconstante at 1( 0) + 0 on 293;
+  architecture comportamento of somaconstante at 16( 358) + 0 on 294;
+file . "src/muxGenerico3x1.vhd" "c5fe3d3e7a6b3e52bb497e8cb7deb87652e5d632" "20220917145120.493":
+  entity muxgenerico3x1 at 1( 0) + 0 on 287;
+  architecture comportamento of muxgenerico3x1 at 14( 392) + 0 on 288;
