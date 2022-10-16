@@ -27,6 +27,14 @@ ARCHITECTURE comportamento OF enableKey IS
     );
   END COMPONENT;
 
+  COMPONENT barramentoKey
+    PORT (
+      KEY_IN : IN STD_LOGIC;
+      HAB_KEY : IN STD_LOGIC;
+      KEY_OUT : OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
+    );
+  END COMPONENT;
+
   COMPONENT edgeDetector
     PORT (
       clk : IN STD_LOGIC;
@@ -48,61 +56,14 @@ ARCHITECTURE comportamento OF enableKey IS
   SIGNAL KEY_0_EDGE : STD_LOGIC;
 
 BEGIN
-  BUFF0_1 : buffer_3_state_1porta
+
+  BARRAMENTO_KEY0 : barramentoKey
   PORT MAP(
-    entrada => KEY_0_REG,
-    habilita => HAB_KEY_3_0(0),
-    saida => OUT_KEY_0(0)
+    KEY_IN => KEY_0_REG,
+    HAB_KEY => HAB_KEY_3_0(0),
+    KEY_OUT => OUT_KEY_0
   );
 
-  BUFF0_2 : buffer_3_state_1porta
-  PORT MAP(
-    entrada => '0',
-    habilita => HAB_KEY_3_0(0),
-    saida => OUT_KEY_0(1)
-  );
-
-  BUFF0_3 : buffer_3_state_1porta
-  PORT MAP(
-    entrada => '0',
-    habilita => HAB_KEY_3_0(0),
-    saida => OUT_KEY_0(2)
-  );
-
-  BUFF0_4 : buffer_3_state_1porta
-  PORT MAP(
-    entrada => '0',
-    habilita => HAB_KEY_3_0(0),
-    saida => OUT_KEY_0(3)
-  );
-
-  BUFF0_5 : buffer_3_state_1porta
-  PORT MAP(
-    entrada => '0',
-    habilita => HAB_KEY_3_0(0),
-    saida => OUT_KEY_0(4)
-  );
-
-  BUFF0_6 : buffer_3_state_1porta
-  PORT MAP(
-    entrada => '0',
-    habilita => HAB_KEY_3_0(0),
-    saida => OUT_KEY_0(5)
-  );
-
-  BUFF0_7 : buffer_3_state_1porta
-  PORT MAP(
-    entrada => '0',
-    habilita => HAB_KEY_3_0(0),
-    saida => OUT_KEY_0(6)
-  );
-
-  BUFF0_8 : buffer_3_state_1porta
-  PORT MAP(
-    entrada => '0',
-    habilita => HAB_KEY_3_0(0),
-    saida => OUT_KEY_0(7)
-  );
   BUFF1 : buffer_3_state_1porta
   PORT MAP(
     entrada => KEY_3_0(1),
