@@ -1,67 +1,67 @@
 v 4
-file . "src/somaConstante.vhd" "349a79a84a18856fd66fd39e1bc87504bad1e6d5" "20221016125517.319":
-  entity somaconstante at 1( 0) + 0 on 1292;
-  architecture comportamento of somaconstante at 16( 396) + 0 on 1293;
-file . "src/registradorGenerico.vhd" "f3aeda611e45fb2e4f8453b5ca4c4fc7725e868b" "20221016125517.305":
-  entity registradorgenerico at 1( 0) + 0 on 1290;
-  architecture comportamento of registradorgenerico at 16( 375) + 0 on 1291;
-file . "src/registradorFlag.vhd" "46d07b909c6d5965599c17f7b606a5863f909549" "20221016125517.297":
-  entity registradorflag at 1( 0) + 0 on 1288;
-  architecture comportamento of registradorflag at 13( 230) + 0 on 1289;
-file . "src/processador.vhd" "857091793d6867ac6ba58e8a76a88c7fccc69231" "20221016125517.288":
-  entity processador at 1( 0) + 0 on 1286;
-  architecture arquitetura of processador at 16( 511) + 0 on 1287;
-file . "src/muxGenerico4x1.vhd" "880adcd76da137c601a92981f7fccf330ad9ebcd" "20221016125517.276":
-  entity muxgenerico4x1 at 1( 0) + 0 on 1284;
-  architecture comportamento of muxgenerico4x1 at 14( 463) + 0 on 1285;
-file . "src/muxGenerico2x1.vhd" "6f6ba04f8e4cb9763fae93e81321d14c92601624" "20221016125517.266":
-  entity muxgenerico2x1 at 1( 0) + 0 on 1282;
-  architecture comportamento of muxgenerico2x1 at 14( 404) + 0 on 1283;
-file . "src/memoriaROM.vhd" "f8710b9ffd1495515672a2e164574b8f57060d58" "20221016125517.256":
-  entity memoriarom at 1( 0) + 0 on 1280;
-  architecture assincrona of memoriarom at 16( 350) + 0 on 1281;
-file . "src/memoriaRAM.vhd" "6412ddb402a572ea0f47900469c198f59e29e52b" "20221016125517.236":
-  entity memoriaram at 1( 0) + 0 on 1278;
-  architecture rtl of memoriaram at 20( 527) + 0 on 1279;
-file . "src/enableSwitch.vhd" "fda78ae8375ebab973ab1a9ef74876dd62528951" "20221016125517.222":
-  entity enableswitch at 1( 0) + 0 on 1276;
-  architecture comportamento of enableswitch at 18( 514) + 0 on 1277;
-file . "src/enableKey.vhd" "1c1bf0c1dce54ab4ab99cdc304ce078c8b5aa687" "20221016125517.213":
-  entity enablekey at 1( 0) + 0 on 1274;
-  architecture comportamento of enablekey at 20( 597) + 0 on 1275;
-file . "src/edgeDetector.vhd" "297a9d39b44cd764b76dcd76dbd1c5a351f805d7" "20221016125517.203":
-  entity edgedetector at 1( 0) + 0 on 1272;
-  architecture bordasubida of edgedetector at 12( 193) + 0 on 1273;
-file . "src/displayHex.vhd" "a28792bb03aaa924001b1bcf0c4a071e80a13afb" "20221016125517.194":
-  entity displayhex at 1( 0) + 0 on 1270;
-  architecture comportamento of displayhex at 18( 601) + 0 on 1271;
-file . "src/decoderGeneric.vhd" "7d1a37a5629e5cd90bcc923db611d0ca40463b4c" "20221016125517.184":
-  entity decodergeneric at 1( 0) + 0 on 1268;
-  architecture comportamento of decodergeneric at 12( 261) + 0 on 1269;
-file . "src/decoder3x8.vhd" "26f250f3e74c178e3a93d8f4c261e322e5edc55a" "20221016125517.174":
-  entity decoder3x8 at 1( 0) + 0 on 1266;
-  architecture comportamento of decoder3x8 at 11( 207) + 0 on 1267;
-file . "src/conversorHex7Seg.vhd" "da38494047fa5724ceb652db66348962a5336502" "20221016125517.167":
-  entity conversorhex7seg at 1( 0) + 0 on 1264;
-  architecture comportamento of conversorhex7seg at 16( 367) + 0 on 1265;
-file . "src/buffer_3_state_8portas.vhd" "da367c1ca6da240f98cb2b0b1a6df872203ee26a" "20221016125517.158":
-  entity buffer_3_state_8portas at 1( 0) + 0 on 1262;
-  architecture comportamento of buffer_3_state_8portas at 12( 270) + 0 on 1263;
-file . "src/buffer_3_state_1porta.vhd" "5b4b8fc0642850edac78b38df0f1cd696ebaefda" "20221016125517.150":
-  entity buffer_3_state_1porta at 1( 0) + 0 on 1260;
-  architecture comportamento of buffer_3_state_1porta at 12( 207) + 0 on 1261;
-file . "src/addrDecoder.vhd" "3a6db882b035c8667b9fddc0a69ea3789f9d25c6" "20221016125517.136":
-  entity addrdecoder at 1( 0) + 0 on 1256;
-  architecture comportamento of addrdecoder at 23( 724) + 0 on 1257;
-file . "src/ULASomaSub.vhd" "3334ad61a606c7fa4517f460484982cf811864e0" "20221016125517.123":
-  entity ulasomasub at 1( 0) + 0 on 1254;
-  architecture comportamento of ulasomasub at 15( 490) + 0 on 1255;
-file . "src/Atv1.vhd" "54a205bf2eb67b8f322988f7b2d79d6c036409c1" "20221016125517.086":
-  entity atv1 at 1( 0) + 0 on 1252;
-  architecture arquitetura of atv1 at 25( 919) + 0 on 1253;
-file . "test/Atv1_tb.vhd" "d57ee0fda6b58beea389a30eb823659936c329a1" "20221016125517.451":
-  entity atv1_tb at 1( 0) + 0 on 1294;
-  architecture test of atv1_tb at 7( 76) + 0 on 1295;
-file . "src/barramentoKey.vhd" "1487cf2e1fc7fe2fe9b22dad008ea173b892e82d" "20221016125517.144":
-  entity barramentokey at 1( 0) + 0 on 1258;
-  architecture comportamento of barramentokey at 12( 197) + 0 on 1259;
+file . "src/barramentoKey.vhd" "1487cf2e1fc7fe2fe9b22dad008ea173b892e82d" "20221016132228.869":
+  entity barramentokey at 1( 0) + 0 on 1352;
+  architecture comportamento of barramentokey at 12( 197) + 0 on 1353;
+file . "test/Atv1_tb.vhd" "297040ce3791c56e71fff55e257a2b6847524a05" "20221016132229.163":
+  entity atv1_tb at 1( 0) + 0 on 1388;
+  architecture test of atv1_tb at 7( 76) + 0 on 1389;
+file . "src/Atv1.vhd" "44139f99389c5f7971a1e3e086a3a06289810a97" "20221016132228.810":
+  entity atv1 at 1( 0) + 0 on 1346;
+  architecture arquitetura of atv1 at 25( 919) + 0 on 1347;
+file . "src/ULASomaSub.vhd" "3334ad61a606c7fa4517f460484982cf811864e0" "20221016132228.846":
+  entity ulasomasub at 1( 0) + 0 on 1348;
+  architecture comportamento of ulasomasub at 15( 490) + 0 on 1349;
+file . "src/addrDecoder.vhd" "c4089b87cfe4bd5ec676bb1bbcf86b8d02483e25" "20221016132228.861":
+  entity addrdecoder at 1( 0) + 0 on 1350;
+  architecture comportamento of addrdecoder at 27( 898) + 0 on 1351;
+file . "src/buffer_3_state_1porta.vhd" "5b4b8fc0642850edac78b38df0f1cd696ebaefda" "20221016132228.875":
+  entity buffer_3_state_1porta at 1( 0) + 0 on 1354;
+  architecture comportamento of buffer_3_state_1porta at 12( 207) + 0 on 1355;
+file . "src/buffer_3_state_8portas.vhd" "da367c1ca6da240f98cb2b0b1a6df872203ee26a" "20221016132228.882":
+  entity buffer_3_state_8portas at 1( 0) + 0 on 1356;
+  architecture comportamento of buffer_3_state_8portas at 12( 270) + 0 on 1357;
+file . "src/conversorHex7Seg.vhd" "da38494047fa5724ceb652db66348962a5336502" "20221016132228.890":
+  entity conversorhex7seg at 1( 0) + 0 on 1358;
+  architecture comportamento of conversorhex7seg at 16( 367) + 0 on 1359;
+file . "src/decoder3x8.vhd" "26f250f3e74c178e3a93d8f4c261e322e5edc55a" "20221016132228.898":
+  entity decoder3x8 at 1( 0) + 0 on 1360;
+  architecture comportamento of decoder3x8 at 11( 207) + 0 on 1361;
+file . "src/decoderGeneric.vhd" "7d1a37a5629e5cd90bcc923db611d0ca40463b4c" "20221016132228.906":
+  entity decodergeneric at 1( 0) + 0 on 1362;
+  architecture comportamento of decodergeneric at 12( 261) + 0 on 1363;
+file . "src/displayHex.vhd" "a28792bb03aaa924001b1bcf0c4a071e80a13afb" "20221016132228.917":
+  entity displayhex at 1( 0) + 0 on 1364;
+  architecture comportamento of displayhex at 18( 601) + 0 on 1365;
+file . "src/edgeDetector.vhd" "297a9d39b44cd764b76dcd76dbd1c5a351f805d7" "20221016132228.925":
+  entity edgedetector at 1( 0) + 0 on 1366;
+  architecture bordasubida of edgedetector at 12( 193) + 0 on 1367;
+file . "src/enableKey.vhd" "0cd0fd208ddc4dcff16ce4a4a13456823543c2a2" "20221016132228.936":
+  entity enablekey at 1( 0) + 0 on 1368;
+  architecture comportamento of enablekey at 24( 883) + 0 on 1369;
+file . "src/enableSwitch.vhd" "fda78ae8375ebab973ab1a9ef74876dd62528951" "20221016132228.943":
+  entity enableswitch at 1( 0) + 0 on 1370;
+  architecture comportamento of enableswitch at 18( 514) + 0 on 1371;
+file . "src/memoriaRAM.vhd" "6412ddb402a572ea0f47900469c198f59e29e52b" "20221016132228.956":
+  entity memoriaram at 1( 0) + 0 on 1372;
+  architecture rtl of memoriaram at 20( 527) + 0 on 1373;
+file . "src/memoriaROM.vhd" "f8710b9ffd1495515672a2e164574b8f57060d58" "20221016132228.978":
+  entity memoriarom at 1( 0) + 0 on 1374;
+  architecture assincrona of memoriarom at 16( 350) + 0 on 1375;
+file . "src/muxGenerico2x1.vhd" "6f6ba04f8e4cb9763fae93e81321d14c92601624" "20221016132228.986":
+  entity muxgenerico2x1 at 1( 0) + 0 on 1376;
+  architecture comportamento of muxgenerico2x1 at 14( 404) + 0 on 1377;
+file . "src/muxGenerico4x1.vhd" "880adcd76da137c601a92981f7fccf330ad9ebcd" "20221016132228.993":
+  entity muxgenerico4x1 at 1( 0) + 0 on 1378;
+  architecture comportamento of muxgenerico4x1 at 14( 463) + 0 on 1379;
+file . "src/processador.vhd" "857091793d6867ac6ba58e8a76a88c7fccc69231" "20221016132229.006":
+  entity processador at 1( 0) + 0 on 1380;
+  architecture arquitetura of processador at 16( 511) + 0 on 1381;
+file . "src/registradorFlag.vhd" "46d07b909c6d5965599c17f7b606a5863f909549" "20221016132229.013":
+  entity registradorflag at 1( 0) + 0 on 1382;
+  architecture comportamento of registradorflag at 13( 230) + 0 on 1383;
+file . "src/registradorGenerico.vhd" "f3aeda611e45fb2e4f8453b5ca4c4fc7725e868b" "20221016132229.020":
+  entity registradorgenerico at 1( 0) + 0 on 1384;
+  architecture comportamento of registradorgenerico at 16( 375) + 0 on 1385;
+file . "src/somaConstante.vhd" "349a79a84a18856fd66fd39e1bc87504bad1e6d5" "20221016132229.031":
+  entity somaconstante at 1( 0) + 0 on 1386;
+  architecture comportamento of somaconstante at 16( 396) + 0 on 1387;

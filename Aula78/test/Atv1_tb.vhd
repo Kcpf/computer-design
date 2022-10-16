@@ -69,7 +69,7 @@ BEGIN
 
   main : PROCESS BEGIN
 
-    key_vector <= "0001";
+    key_vector <= "1111";
 
     WAIT FOR 170 ns;
 
@@ -77,7 +77,7 @@ BEGIN
 
     WAIT FOR 10 ns;
 
-    key_vector <= "0001";
+    key_vector <= "1111";
 
     WAIT FOR 170 ns;
 
@@ -85,7 +85,7 @@ BEGIN
 
     WAIT FOR 10 ns;
 
-    key_vector <= "0001";
+    key_vector <= "1111";
 
     WAIT;
 
