@@ -1,0 +1,24 @@
+LIMITE:
+  LDA @3
+  CEQ @7
+  JEQ @LIMITE_DEZENA
+  RET
+
+  LIMITE_DEZENA:
+    LDA @4
+    CEQ @8
+    JEQ @LIMITE_CENTENA
+    RET
+
+  LIMITE_CENTENA:
+    LDA @5
+    CEQ @9
+    JEQ @LIMITE_COMPARACAO
+    RET
+
+  LIMITE_COMPARACAO:
+    LDI $1
+    STA @257
+    STA @6
+
+  RET

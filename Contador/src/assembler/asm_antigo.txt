@@ -1,0 +1,184 @@
+SETUP:
+  LDI $0
+
+  STA @256
+  STA @257
+  STA @258
+
+  STA @288
+  STA @289
+  STA @290
+  STA @291
+  STA @292
+  STA @293
+
+  STA @0
+
+  LDI $1
+  STA @1
+
+  LDI $10
+  STA @2
+
+  LDI $0
+  STA @3
+  STA @4
+  STA @5
+  STA @6
+
+  JSR @CONFIGURA_LIMITE
+
+LOOP:
+  LDA @352
+  CEQ @0
+  LDI $1
+  STA @511
+  JEQ @ESCREVE_VALOR
+  JSR @INCREMENTO
+
+  ESCREVE_VALOR:
+    LDA @3
+    STA @288
+    LDA @4
+    STA @289
+    LDA @5
+    STA @290
+
+  LDA @353
+  CEQ @0
+  JEQ @LINHA_LIMITE
+  LDI $1
+  STA @510
+  JSR @CONFIGURA_LIMITE
+  JSR @RESET 
+
+  LINHA_LIMITE:
+    JSR @LIMITE
+
+  LDA @356
+  CEQ @0
+  JEQ @LOOP
+  LDI $1
+  STA @507 
+  JSR @RESET
+
+  JMP @LOOP
+
+
+CONFIGURA_LIMITE:
+  LDA @320
+  STA @7
+  STA @291
+
+  LDA @353
+  CEQ @0
+  JEQ @CONFIGURA_LIMITE
+
+  LDI $1
+  STA @510
+
+  CONFIGURA_LIMITE_2:
+    LDA @320
+    STA @8
+    STA @292
+
+    LDA @353
+    CEQ @0
+    JEQ @CONFIGURA_LIMITE_2
+
+    LDI $1
+    STA @510
+
+  CONFIGURA_LIMITE_3:
+    LDA @320
+    STA @9
+    STA @293
+
+    LDA @353
+    CEQ @0
+    JEQ @CONFIGURA_LIMITE_3
+
+    LDI $1
+    STA @510
+
+  RET
+
+INCREMENTO:
+  LDA @6
+  CEQ @1
+  JEQ @INCREMENTO_FINAL
+
+  LDA @3
+  SOMA @1
+  CEQ @2
+  JEQ @INCREMENTO_DEZENA
+  STA @3
+  RET
+
+  INCREMENTO_DEZENA:
+    LDI $0
+    STA @3
+    LDA @4
+    SOMA @1
+    CEQ @2
+    JEQ @INCREMENTO_CENTENA
+    STA @4
+    RET
+
+
+  INCREMENTO_CENTENA:
+    LDI $0
+    STA @4
+    LDA @5
+    SOMA @1
+    CEQ @2
+    JEQ @INCREMENTO_OVERFLOW
+    STA @5
+    RET
+
+  INCREMENTO_OVERFLOW:
+    LDI $0
+    STA @5
+    LDI $1
+    STA @258    
+    STA @6      
+
+  INCREMENTO_FINAL:
+    RET
+    
+LIMITE:
+  LDA @3
+  CEQ @7
+  JEQ @LIMITE_DEZENA
+  RET
+
+  LIMITE_DEZENA:
+    LDA @4
+    CEQ @8
+    JEQ @LIMITE_CENTENA
+    RET
+
+  LIMITE_CENTENA:
+    LDA @5
+    CEQ @9
+    JEQ @LIMITE_COMPARACAO
+    RET
+
+  LIMITE_COMPARACAO:
+    LDI $1
+    STA @257
+    STA @6
+
+  RET
+
+RESET:
+  LDI $0
+
+  STA @3
+  STA @4
+  STA @5
+  STA @6
+  STA @257
+  STA @258
+
+  RET

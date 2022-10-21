@@ -1,0 +1,34 @@
+CONFIGURA_LIMITE:
+  LDA @320
+  STA @7
+
+  LDA @352
+  CEQ @0
+  JEQ @CONFIGURA_LIMITE
+
+  LDI $1
+  STA @511
+
+  CONFIGURA_LIMITE_2:
+    LDA @320
+    STA @8
+
+    LDA @352
+    CEQ @0
+    JEQ @CONFIGURA_LIMITE_2
+
+    LDI $1
+    STA @511
+
+  CONFIGURA_LIMITE_3:
+    LDA @320
+    STA @9
+
+    LDA @352
+    CEQ @0
+    JEQ @CONFIGURA_LIMITE_3
+
+    LDI $1
+    STA @511
+
+  RET

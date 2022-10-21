@@ -1,0 +1,24 @@
+LDI $0
+STA @0
+STA @2
+LDI $1
+STA @1
+
+MAIN:
+  LDA @352
+  STA @288
+  CEQ @0
+  JEQ @MAIN
+  JSR @INCREMENTA
+  JMP @MAIN
+
+INCREMENTA:
+  STA @511
+  LDA @2
+  SOMA @1
+  STA @2
+  STA @256
+  STA @288
+  STA @289
+  STA @290
+  RET

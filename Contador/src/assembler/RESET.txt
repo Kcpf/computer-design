@@ -1,0 +1,11 @@
+RESET:
+  LDI $0
+
+  STA @3
+  STA @4
+  STA @5
+  STA @6
+  STA @257
+  STA @258
+
+  RET
