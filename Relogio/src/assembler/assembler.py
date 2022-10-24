@@ -39,6 +39,8 @@ mne = {
     "CGT": "01100",
     "JLT": "01101",
     "JGT": "01110",
+    "MOD": "01111",
+    "DIV": "10000",
 }
 
 # Tabela com labels e seus respectivos endereços

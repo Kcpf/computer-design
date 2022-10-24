@@ -7,7 +7,7 @@ ENTITY InstructionDecoder IS
     entrada_flag_zero : IN STD_LOGIC := '0';
     entrada_flag_greater : IN STD_LOGIC := '0';
     entrada_flag_lesser : IN STD_LOGIC := '0';
-    saida : OUT STD_LOGIC_VECTOR(13 DOWNTO 0) := (OTHERS => '0')
+    saida : OUT STD_LOGIC_VECTOR(14 DOWNTO 0) := (OTHERS => '0')
   );
 END ENTITY;
 
@@ -28,37 +28,41 @@ ARCHITECTURE comportamento OF InstructionDecoder IS
   CONSTANT CGT : STD_LOGIC_VECTOR(4 DOWNTO 0) := "01100";
   CONSTANT JLT : STD_LOGIC_VECTOR(4 DOWNTO 0) := "01101";
   CONSTANT JGT : STD_LOGIC_VECTOR(4 DOWNTO 0) := "01110";
+  CONSTANT MODL : STD_LOGIC_VECTOR(4 DOWNTO 0) := "01111";
+  CONSTANT DIV : STD_LOGIC_VECTOR(4 DOWNTO 0) := "10000";
 
-  -- 13 Hab Flag Less Than
-  -- 12 Hab Flag Greater Than
-  -- 11 None - Hab escrita retorno
-  -- 10 None - JMP
-  -- 9 None  - RET
-  -- 8 JMP   - JSR
-  -- 7 JEQ
-  -- 6 Sel MUX
-  -- 5 Hab A
-  -- 4 e 3 Operancao
+  -- 14 Hab Flag Less Than
+  -- 13 Hab Flag Greater Than
+  -- 12 Hab escrita retorno
+  -- 11 JMP
+  -- 10 RET
+  -- 9 JSR
+  -- 8 JEQ
+  -- 7 Sel MUX
+  -- 6 Hab A
+  -- 5, 4 e 3 Operancao
   -- 2 Hab Flag Zero
   -- 1 RD
   -- 0 WR
 
 BEGIN
-  saida <= "00000000000000" WHEN entrada = NOP ELSE
-    "00000000110010" WHEN entrada = LDA ELSE
-    "00000000100010" WHEN entrada = SOMA ELSE
-    "00000000101010" WHEN entrada = SUB ELSE
-    "00000001110000" WHEN entrada = LDI ELSE
-    "00000000010001" WHEN entrada = STA ELSE
-    "00010000000000" WHEN entrada = JMP ELSE
-    "00000010000000" WHEN (entrada = JEQ AND entrada_flag_zero = '1') ELSE
-    "00000000001110" WHEN entrada = CEQ ELSE
-    "00100100000000" WHEN entrada = JSR ELSE
-    "00001000000000" WHEN entrada = RET ELSE
-    "10000000001010" WHEN entrada = CLT ELSE
-    "01000000001010" WHEN entrada = CGT ELSE
-    "00000010000000" WHEN (entrada = JLT AND entrada_flag_lesser = '1') ELSE
-    "00000010000000" WHEN (entrada = JGT AND entrada_flag_greater = '1') ELSE
-    "00000000000000"; -- NOP para os entradas Indefinidas
+  saida <=
+    "000000000000000" WHEN entrada = NOP ELSE
+    "000000001010010" WHEN entrada = LDA ELSE
+    "000000001000010" WHEN entrada = SOMA ELSE
+    "000000001001010" WHEN entrada = SUB ELSE
+    "000000011010000" WHEN entrada = LDI ELSE
+    "000000000010001" WHEN entrada = STA ELSE
+    "000100000000000" WHEN entrada = JMP ELSE
+    "000000100000000" WHEN (entrada = JEQ AND entrada_flag_zero = '1') ELSE
+    "000000000001110" WHEN entrada = CEQ ELSE
+    "001001000000000" WHEN entrada = JSR ELSE
+    "000010000000000" WHEN entrada = RET ELSE
+    "100000000001010" WHEN entrada = CLT ELSE
+    "010000000001010" WHEN entrada = CGT ELSE
+    "000000100000000" WHEN (entrada = JLT AND entrada_flag_lesser = '1') ELSE
+    "000000001100010" WHEN entrada = MODL ELSE
+    "000000001101010" WHEN entrada = DIV ELSE
+    "000000000000000"; -- NOP para os entradas Indefinidas
 
 END ARCHITECTURE;

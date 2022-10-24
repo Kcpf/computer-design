@@ -23,15 +23,12 @@ RAM:
   MEM[0] = Constante 0
   MEM[1] = Constante 1
   MEM[2] = Constante 10
+  MEM[3] = Constante 60
+  MEM[4] = Constante 24
 
-  MEM[3] = Unidade contador
-  MEM[4] = Dezena contador
-  MEM[5] = Centena contador
-
-  MEM[6] = Flag inibe contagem
-  MEM[7] = Limite unidade
-  MEM[8] = Limite dezena
-  MEM[9] = Limite centena
+  MEM[5] = Segundos
+  MEM[6] = Minutos
+  MEM[7] = Horas
 
 LEDR:
   MEM[256] = LEDR0 - LEDR7

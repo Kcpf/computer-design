@@ -1,11 +1,110 @@
-LDI %R0, $1
-STA %R0, @0
-LDI %R1, $2
-SOMA %R1, @0
-CLT %R1, @0
-JLT @SAMPAS
-LDI %R1, $9
-SOMA %R1, @0
+SETUP:
+  LDI %R0, $0
 
-SAMPAS:
-  NOP
+  STA %R0, @256
+  STA %R0, @257
+  STA %R0, @258
+
+  STA %R0, @288
+  STA %R0, @289
+  STA %R0, @290
+  STA %R0, @291
+  STA %R0, @292
+  STA %R0, @293
+
+  STA %R0, @0
+
+  STA %R0, @5
+  STA %R0, @6
+  STA %R0, @7
+
+  LDI %R0, $1
+  STA %R0, @1
+
+  LDI %R0, $10
+  STA %R0, @2
+
+  LDI %R0, $60
+  STA %R0, @3
+
+  LDI %R1, $24
+  STA %R1, @4
+
+
+LOOP:
+  LDA %R0, @352
+  CEQ %R0, @0
+  LDI %R0, $1
+  STA %R0, @511
+  JEQ @DISPLAY
+  JSR @INCREMENTO
+
+  DISPLAY:
+    // Segundos Unidade
+    LDA %R0, @5
+    MOD %R0, @2
+    STA %R0, @288
+
+    // Segundos Dezena
+    LDA %R1, @5
+    DIV %R1, @2
+    STA %R1, @289
+
+    // Minutos Unidade
+    LDA %R0, @6
+    MOD %R0, @2
+    STA %R0, @290
+
+    // Minutos Dezena
+    LDA %R1, @6
+    DIV %R1, @2
+    STA %R1, @291
+
+    // Horas Unidade
+    LDA %R0, @7
+    MOD %R0, @2
+    STA %R0, @292
+
+    // Horas Dezena
+    LDA %R1, @7
+    DIV %R1, @2
+    STA %R1, @293
+
+  JMP @LOOP
+
+
+INCREMENTO:
+  LDA %R0, @5
+  SOMA %R0, @1
+  CEQ %R0, @3
+  JEQ @INCREMENTA_MINUTO
+  STA %R0, @5
+  RET
+
+  INCREMENTA_MINUTO:
+    LDI %R0, $0
+    STA %R0, @5
+    LDA %R0, @6
+    SOMA %R0, @1
+    CEQ %R0, @3
+    JEQ @INCREMENTA_HORA
+    STA %R0, @6
+    RET
+
+  INCREMENTA_HORA:
+    LDI %R0, $0
+    STA %R0, @6
+    LDA %R0, @7
+    SOMA %R0, @1
+    CEQ %R0, @4
+    JEQ @INCREMENTO_OVERFLOW
+    STA %R0, @7
+    RET
+
+  INCREMENTO_OVERFLOW:
+    LDI %R0, $0
+    STA %R0, @5
+    STA %R0, @6
+    STA %R0, @7
+    
+  RET
