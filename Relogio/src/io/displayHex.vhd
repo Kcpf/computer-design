@@ -1,7 +1,7 @@
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 
-ENTITY displayHex IS
+ENTITY DisplayHex IS
   PORT (
     ENTRADA_HABILITA : IN STD_LOGIC_VECTOR(5 DOWNTO 0) := "000000";
     ESCRITA_DADOS : IN STD_LOGIC_VECTOR(3 DOWNTO 0) := "0000";
@@ -15,9 +15,9 @@ ENTITY displayHex IS
   );
 END ENTITY;
 
-ARCHITECTURE comportamento OF displayHex IS
+ARCHITECTURE comportamento OF DisplayHex IS
 
-  COMPONENT registradorGenerico
+  COMPONENT GenericRegister
     GENERIC (
       larguraDados : NATURAL := 8
     );
@@ -29,7 +29,7 @@ ARCHITECTURE comportamento OF displayHex IS
     );
   END COMPONENT;
 
-  COMPONENT conversorHex7Seg
+  COMPONENT Hex7SegConverter
     PORT (
       -- Input ports
       dadoHex : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
@@ -50,7 +50,7 @@ ARCHITECTURE comportamento OF displayHex IS
   SIGNAL REG_DECODER_5 : STD_LOGIC_VECTOR(3 DOWNTO 0);
 
 BEGIN
-  REG0 : registradorGenerico
+  REG0 : GenericRegister
   GENERIC MAP(larguraDados => 4)
   PORT MAP(
     DIN => ESCRITA_DADOS(3 DOWNTO 0),
@@ -60,7 +60,7 @@ BEGIN
     RST => '0'
   );
 
-  DEC0 : conversorHex7Seg
+  DEC0 : Hex7SegConverter
   PORT MAP(
     dadoHex => REG_DECODER_0,
     apaga => '0',
@@ -69,7 +69,7 @@ BEGIN
     saida7seg => HEX0
   );
 
-  REG1 : registradorGenerico
+  REG1 : GenericRegister
   GENERIC MAP(larguraDados => 4)
   PORT MAP(
     DIN => ESCRITA_DADOS(3 DOWNTO 0),
@@ -79,7 +79,7 @@ BEGIN
     RST => '0'
   );
 
-  DEC1 : conversorHex7Seg
+  DEC1 : Hex7SegConverter
   PORT MAP(
     dadoHex => REG_DECODER_1,
     apaga => '0',
@@ -88,7 +88,7 @@ BEGIN
     saida7seg => HEX1
   );
 
-  REG2 : registradorGenerico
+  REG2 : GenericRegister
   GENERIC MAP(larguraDados => 4)
   PORT MAP(
     DIN => ESCRITA_DADOS(3 DOWNTO 0),
@@ -98,7 +98,7 @@ BEGIN
     RST => '0'
   );
 
-  DEC2 : conversorHex7Seg
+  DEC2 : Hex7SegConverter
   PORT MAP(
     dadoHex => REG_DECODER_2,
     apaga => '0',
@@ -107,7 +107,7 @@ BEGIN
     saida7seg => HEX2
   );
 
-  REG3 : registradorGenerico
+  REG3 : GenericRegister
   GENERIC MAP(larguraDados => 4)
   PORT MAP(
     DIN => ESCRITA_DADOS(3 DOWNTO 0),
@@ -117,7 +117,7 @@ BEGIN
     RST => '0'
   );
 
-  DEC3 : conversorHex7Seg
+  DEC3 : Hex7SegConverter
   PORT MAP(
     dadoHex => REG_DECODER_3,
     apaga => '0',
@@ -126,7 +126,7 @@ BEGIN
     saida7seg => HEX3
   );
 
-  REG4 : registradorGenerico
+  REG4 : GenericRegister
   GENERIC MAP(larguraDados => 4)
   PORT MAP(
     DIN => ESCRITA_DADOS(3 DOWNTO 0),
@@ -136,7 +136,7 @@ BEGIN
     RST => '0'
   );
 
-  DEC4 : conversorHex7Seg
+  DEC4 : Hex7SegConverter
   PORT MAP(
     dadoHex => REG_DECODER_4,
     apaga => '0',
@@ -144,7 +144,8 @@ BEGIN
     overflow => '0',
     saida7seg => HEX4
   );
-  REG5 : registradorGenerico
+
+  REG5 : GenericRegister
   GENERIC MAP(larguraDados => 4)
   PORT MAP(
     DIN => ESCRITA_DADOS(3 DOWNTO 0),
@@ -154,7 +155,7 @@ BEGIN
     RST => '0'
   );
 
-  DEC5 : conversorHex7Seg
+  DEC5 : Hex7SegConverter
   PORT MAP(
     dadoHex => REG_DECODER_5,
     apaga => '0',

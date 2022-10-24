@@ -2,7 +2,7 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL; -- Biblioteca IEEE para funções aritméticas
 
-ENTITY ULASomaSub IS
+ENTITY ULA IS
   GENERIC (larguraDados : NATURAL := 4);
   PORT (
     entradaA, entradaB : IN STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0) := (OTHERS => '0');
@@ -14,7 +14,7 @@ ENTITY ULASomaSub IS
   );
 END ENTITY;
 
-ARCHITECTURE comportamento OF ULASomaSub IS
+ARCHITECTURE arch OF ULA IS
   SIGNAL soma : STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
   SIGNAL subtracao : STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
 BEGIN

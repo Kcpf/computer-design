@@ -1,7 +1,7 @@
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 
-ENTITY bancoReg IS
+ENTITY ProcessorRegisters IS
   PORT (
     CLOCK : IN STD_LOGIC := '0';
     REG_ADDR : IN STD_LOGIC_VECTOR(1 DOWNTO 0) := (OTHERS => '0');
@@ -11,8 +11,8 @@ ENTITY bancoReg IS
   );
 END ENTITY;
 
-ARCHITECTURE arquitetura OF bancoReg IS
-  COMPONENT muxGenerico4x1
+ARCHITECTURE arch OF ProcessorRegisters IS
+  COMPONENT GenericMux4x1
     GENERIC (larguraDados : NATURAL := 8);
     PORT (
       entradaA_MUX, entradaB_MUX, entradaC_MUX, entradaD_MUX : IN STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
@@ -21,7 +21,7 @@ ARCHITECTURE arquitetura OF bancoReg IS
     );
   END COMPONENT;
 
-  COMPONENT dMuxGenerico
+  COMPONENT GenericDMux1x4
     GENERIC (larguraDados : NATURAL := 8);
     PORT (
       entrada_DMUX : IN STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
@@ -30,7 +30,7 @@ ARCHITECTURE arquitetura OF bancoReg IS
     );
   END COMPONENT;
 
-  COMPONENT dMux1bit
+  COMPONENT OneBitDMux
     PORT (
       entrada_DMUX : IN STD_LOGIC;
       seletor_DMUX : IN STD_LOGIC_VECTOR(1 DOWNTO 0) := (OTHERS => '0');
@@ -38,7 +38,7 @@ ARCHITECTURE arquitetura OF bancoReg IS
     );
   END COMPONENT;
 
-  COMPONENT registradorGenerico
+  COMPONENT GenericRegister
     GENERIC (
       larguraDados : NATURAL := 8
     );
@@ -55,7 +55,7 @@ ARCHITECTURE arquitetura OF bancoReg IS
   SIGNAL DOUT_0, DOUT_1, DOUT_2, DOUT_3 : STD_LOGIC_VECTOR (7 DOWNTO 0);
 
 BEGIN
-  DMUX1 : dMuxGenerico
+  DMUX1 : GenericDMux1x4
   GENERIC MAP(larguraDados => 8)
   PORT MAP(
     entrada_DMUX => DATA_IN,
@@ -66,7 +66,7 @@ BEGIN
     saidaD_DMUX => DIN_3
   );
 
-  DMUX2 : dMux1bit
+  DMUX2 : OneBitDMux
   PORT MAP(
     entrada_DMUX => HAB_ESCRITA,
     seletor_DMUX => REG_ADDR,
@@ -76,7 +76,7 @@ BEGIN
     saidaD_DMUX => HAB_3
   );
 
-  MUX : muxGenerico4x1
+  MUX : GenericMux4x1
   GENERIC MAP(larguraDados => 8)
   PORT MAP(
     entradaA_MUX => DOUT_0,
@@ -87,19 +87,19 @@ BEGIN
     saida_MUX => SAIDA
   );
 
-  REG0 : registradorGenerico
+  REG0 : GenericRegister
   GENERIC MAP(larguraDados => 8)
   PORT MAP(DIN => DIN_0, DOUT => DOUT_0, ENABLE => HAB_0, CLK => CLOCK, RST => '0');
 
-  REG1 : registradorGenerico
+  REG1 : GenericRegister
   GENERIC MAP(larguraDados => 8)
   PORT MAP(DIN => DIN_1, DOUT => DOUT_1, ENABLE => HAB_1, CLK => CLOCK, RST => '0');
 
-  REG2 : registradorGenerico
+  REG2 : GenericRegister
   GENERIC MAP(larguraDados => 8)
   PORT MAP(DIN => DIN_2, DOUT => DOUT_2, ENABLE => HAB_2, CLK => CLOCK, RST => '0');
 
-  REG3 : registradorGenerico
+  REG3 : GenericRegister
   GENERIC MAP(larguraDados => 8)
   PORT MAP(DIN => DIN_3, DOUT => DOUT_3, ENABLE => HAB_3, CLK => CLOCK, RST => '0');
 

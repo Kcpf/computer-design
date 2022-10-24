@@ -1,11 +1,11 @@
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 
-ENTITY Atv1_tb IS
-END Atv1_tb;
+ENTITY TopLevel_tb IS
+END TopLevel_tb;
 
-ARCHITECTURE test OF Atv1_tb IS
-  COMPONENT Atv1
+ARCHITECTURE test OF TopLevel_tb IS
+  COMPONENT TopLevel
     GENERIC (
       larguraDados : NATURAL := 8;
       larguraEnderecos : NATURAL := 9;
@@ -44,7 +44,7 @@ ARCHITECTURE test OF Atv1_tb IS
 
 BEGIN
 
-  atv : Atv1
+  TL : TopLevel
   GENERIC MAP(
     larguraDados => 8,
     larguraEnderecos => 9,

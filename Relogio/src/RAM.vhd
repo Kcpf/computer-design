@@ -2,7 +2,7 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
-ENTITY memoriaRAM IS
+ENTITY RAM IS
   GENERIC (
     dataWidth : NATURAL := 8;
     addrWidth : NATURAL := 8
@@ -17,24 +17,24 @@ ENTITY memoriaRAM IS
   );
 END ENTITY;
 
-ARCHITECTURE rtl OF memoriaRAM IS
+ARCHITECTURE rtl OF RAM IS
   -- Build a 2-D array type for the RAM
   SUBTYPE word_t IS STD_LOGIC_VECTOR(dataWidth - 1 DOWNTO 0);
   TYPE memory_t IS ARRAY((2 ** addrWidth - 1) DOWNTO 0) OF word_t;
 
   -- Declare the RAM signal.
-  SIGNAL ram : memory_t;
+  SIGNAL ram_mem : memory_t;
 BEGIN
   PROCESS (clk)
   BEGIN
     IF (rising_edge(clk)) THEN
       IF (we = '1' AND habilita = '1') THEN
-        ram(to_integer(unsigned(addr))) <= dado_in;
+        ram_mem(to_integer(unsigned(addr))) <= dado_in;
       END IF;
     END IF;
   END PROCESS;
 
   -- A leitura é sempre assincrona e quando houver habilitacao:
-  dado_out <= ram(to_integer(unsigned(addr))) WHEN (re = '1' AND habilita = '1') ELSE
+  dado_out <= ram_mem(to_integer(unsigned(addr))) WHEN (re = '1' AND habilita = '1') ELSE
     (OTHERS => 'Z');
 END ARCHITECTURE;

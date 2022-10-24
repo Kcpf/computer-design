@@ -1,7 +1,7 @@
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 
-ENTITY Atv1 IS
+ENTITY TopLevel IS
   GENERIC (
     larguraDados : NATURAL := 8;
     larguraEnderecos : NATURAL := 9;
@@ -22,9 +22,9 @@ ENTITY Atv1 IS
     HEX5 : OUT STD_LOGIC_VECTOR(6 DOWNTO 0) := (OTHERS => '0')
   );
 END ENTITY;
-ARCHITECTURE arquitetura OF Atv1 IS
+ARCHITECTURE arch OF TopLevel IS
 
-  COMPONENT memoriaRAM
+  COMPONENT RAM
     GENERIC (
       dataWidth : NATURAL := 8;
       addrWidth : NATURAL := 8
@@ -39,7 +39,7 @@ ARCHITECTURE arquitetura OF Atv1 IS
     );
   END COMPONENT;
 
-  COMPONENT memoriaROM
+  COMPONENT ROM
     GENERIC (
       dataWidth : NATURAL := 4;
       addrWidth : NATURAL := 3
@@ -50,7 +50,7 @@ ARCHITECTURE arquitetura OF Atv1 IS
     );
   END COMPONENT;
 
-  COMPONENT processador
+  COMPONENT CPU
     PORT (
       CLOCK : IN STD_LOGIC;
       INSTRUCTION_IN : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
@@ -62,7 +62,7 @@ ARCHITECTURE arquitetura OF Atv1 IS
     );
   END COMPONENT;
 
-  COMPONENT addrDecoder
+  COMPONENT IOAddressDecoder
     PORT (
       ENTRADA : IN STD_LOGIC_VECTOR(8 DOWNTO 0);
       RD : IN STD_LOGIC;
@@ -85,7 +85,7 @@ ARCHITECTURE arquitetura OF Atv1 IS
     );
   END COMPONENT;
 
-  COMPONENT registradorFlag
+  COMPONENT OneBitRegister
     PORT (
       DIN : IN STD_LOGIC;
       DOUT : OUT STD_LOGIC;
@@ -94,7 +94,7 @@ ARCHITECTURE arquitetura OF Atv1 IS
     );
   END COMPONENT;
 
-  COMPONENT registradorGenerico
+  COMPONENT GenericRegister
     GENERIC (
       larguraDados : NATURAL := 8
     );
@@ -106,7 +106,7 @@ ARCHITECTURE arquitetura OF Atv1 IS
     );
   END COMPONENT;
 
-  COMPONENT displayHex
+  COMPONENT DisplayHex
     PORT (
       ENTRADA_HABILITA : IN STD_LOGIC_VECTOR(5 DOWNTO 0) := "000000";
       ESCRITA_DADOS : IN STD_LOGIC_VECTOR(3 DOWNTO 0) := "0000";
@@ -120,7 +120,7 @@ ARCHITECTURE arquitetura OF Atv1 IS
     );
   END COMPONENT;
 
-  COMPONENT enableKey
+  COMPONENT EnableKey
     PORT (
       CLK : IN STD_LOGIC := '0';
       KEY_3_0 : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
@@ -140,7 +140,7 @@ ARCHITECTURE arquitetura OF Atv1 IS
     );
   END COMPONENT;
 
-  COMPONENT enableSwitch
+  COMPONENT EnableSwitch
     PORT (
       SWITCH_9 : IN STD_LOGIC;
       SWITCH_8 : IN STD_LOGIC;
@@ -194,16 +194,16 @@ ARCHITECTURE arquitetura OF Atv1 IS
 BEGIN
 
   -- Memoria
-  RAM : memoriaRAM
+  RAM_MEM : RAM
   GENERIC MAP(dataWidth => 8, addrWidth => 6)
   PORT MAP(addr => ENDERECO_RAM, we => WR, re => RD, habilita => HABILITA_RAM, clk => CLOCK_50, dado_in => PROC_OUT, dado_out => DATA_IN);
 
   -- Falta acertar o conteudo da ROM
-  ROM1 : memoriaROM
+  ROM_MEM : ROM
   GENERIC MAP(dataWidth => 16, addrWidth => 9)
   PORT MAP(Endereco => ENDERECO_ROM, Dado => SAIDA_ROM);
 
-  PROC : processador
+  PROC : CPU
   PORT MAP(
     CLOCK => CLOCK_50,
     INSTRUCTION_IN => SAIDA_ROM,
@@ -215,7 +215,7 @@ BEGIN
     DATA_OUT => PROC_OUT
   );
 
-  DECODER1 : addrDecoder
+  IO_ADDRESS_DECODER : IOAddressDecoder
   PORT MAP(
     ENTRADA => DATA_ADDRESS,
     RD => RD,
@@ -237,7 +237,7 @@ BEGIN
     SAIDA_LIMPA_RESET => HAB_LIMPA_RESET
   );
 
-  FF_LED_1 : registradorFlag
+  FF_LED_1 : OneBitRegister
   PORT MAP(
     DIN => PROC_OUT(0),
     DOUT => LEDR (9),
@@ -246,7 +246,7 @@ BEGIN
     RST => '0'
   );
 
-  FF_LED_2 : registradorFlag
+  FF_LED_2 : OneBitRegister
   PORT MAP(
     DIN => PROC_OUT(0),
     DOUT => LEDR (8),
@@ -255,7 +255,7 @@ BEGIN
     RST => '0'
   );
 
-  REG_LED_FITA : registradorGenerico
+  REG_LED_FITA : GenericRegister
   GENERIC MAP(larguraDados => 8)
   PORT MAP(
     DIN => PROC_OUT(7 DOWNTO 0),
@@ -265,7 +265,7 @@ BEGIN
     RST => '0'
   );
 
-  HEX_DISPLAY : displayHex
+  HEX_DISPLAY : DisplayHex
   PORT MAP(
     ENTRADA_HABILITA => HABILITA_HEX,
     ESCRITA_DADOS => PROC_OUT (3 DOWNTO 0),
@@ -278,7 +278,7 @@ BEGIN
     CLK => CLOCK_50
   );
 
-  SWITCH : enableSwitch
+  SWITCH : EnableSwitch
   PORT MAP(
     SWITCH_9 => SW(9),
     SWITCH_8 => SW(8),
@@ -291,7 +291,7 @@ BEGIN
     OUT_SWITCH_7_0 => DATA_IN
   );
 
-  KEYENABLE : enableKey
+  KEYENABLE : EnableKey
   PORT MAP(
     CLK => CLOCK_50,
     KEY_3_0 => KEY,

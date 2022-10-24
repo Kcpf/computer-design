@@ -1,14 +1,14 @@
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 
-ENTITY decoder3x8 IS
+ENTITY Decoder3x8 IS
   PORT (
     entrada : IN STD_LOGIC_VECTOR(2 DOWNTO 0) := "000";
     saida : OUT STD_LOGIC_VECTOR(7 DOWNTO 0) := "00000000"
   );
 END ENTITY;
 
-ARCHITECTURE comportamento OF decoder3x8 IS
+ARCHITECTURE comportamento OF Decoder3x8 IS
 
 BEGIN
   saida <= "00000001" WHEN entrada = "000" ELSE

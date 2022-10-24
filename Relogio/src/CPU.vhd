@@ -1,7 +1,7 @@
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 
-ENTITY processador IS
+ENTITY CPU IS
   PORT (
     CLOCK : IN STD_LOGIC := '0';
     INSTRUCTION_IN : IN STD_LOGIC_VECTOR(15 DOWNTO 0) := (OTHERS => '0');
@@ -13,9 +13,9 @@ ENTITY processador IS
   );
 END ENTITY;
 
-ARCHITECTURE arquitetura OF processador IS
+ARCHITECTURE arch OF CPU IS
 
-  COMPONENT muxGenerico2x1
+  COMPONENT GenericMux2x1
     GENERIC (larguraDados : NATURAL := 8);
     PORT (
       entradaA_MUX, entradaB_MUX : IN STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
@@ -24,7 +24,7 @@ ARCHITECTURE arquitetura OF processador IS
     );
   END COMPONENT;
 
-  COMPONENT muxGenerico4x1
+  COMPONENT GenericMux4x1
     GENERIC (larguraDados : NATURAL := 8);
     PORT (
       entradaA_MUX, entradaB_MUX, entradaC_MUX, entradaD_MUX : IN STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
@@ -33,7 +33,7 @@ ARCHITECTURE arquitetura OF processador IS
     );
   END COMPONENT;
 
-  COMPONENT bancoReg
+  COMPONENT ProcessorRegisters
     PORT (
       CLOCK : IN STD_LOGIC;
       REG_ADDR : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
@@ -43,7 +43,7 @@ ARCHITECTURE arquitetura OF processador IS
     );
   END COMPONENT;
 
-  COMPONENT registradorGenerico
+  COMPONENT GenericRegister
     GENERIC (
       larguraDados : NATURAL := 8
     );
@@ -55,7 +55,7 @@ ARCHITECTURE arquitetura OF processador IS
     );
   END COMPONENT;
 
-  COMPONENT somaConstante
+  COMPONENT AddConstant
     GENERIC (
       larguraDados : NATURAL := 32;
       constante : NATURAL := 4
@@ -66,7 +66,7 @@ ARCHITECTURE arquitetura OF processador IS
     );
   END COMPONENT;
 
-  COMPONENT ULASomaSub
+  COMPONENT ULA
     GENERIC (larguraDados : NATURAL := 4);
     PORT (
       entradaA, entradaB : IN STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
@@ -78,7 +78,7 @@ ARCHITECTURE arquitetura OF processador IS
     );
   END COMPONENT;
 
-  COMPONENT registradorFlag
+  COMPONENT OneBitRegister
     PORT (
       DIN : IN STD_LOGIC;
       DOUT : OUT STD_LOGIC;
@@ -87,7 +87,7 @@ ARCHITECTURE arquitetura OF processador IS
     );
   END COMPONENT;
 
-  COMPONENT decoderGeneric
+  COMPONENT InstructionDecoder
     PORT (
       entrada : IN STD_LOGIC_VECTOR(4 DOWNTO 0);
       entrada_flag_zero : IN STD_LOGIC;
@@ -125,7 +125,7 @@ ARCHITECTURE arquitetura OF processador IS
 BEGIN
 
   -- O port map completo do MUX.
-  MUX1 : muxGenerico2x1
+  MUX_ULA : GenericMux2x1
   GENERIC MAP(larguraDados => 8)
   PORT MAP(
     entradaA_MUX => DATA_IN,
@@ -134,7 +134,7 @@ BEGIN
     saida_MUX => ENTRADA_B_ULA);
 
   -- MUX do PC.
-  MUX2 : muxGenerico4x1
+  MUX_PC : GenericMux4x1
   GENERIC MAP(larguraDados => 9)
   PORT MAP(
     entradaA_MUX => PROX_PC,
@@ -144,7 +144,7 @@ BEGIN
     seletor_MUX => SEL_MUX_PC,
     saida_MUX => SAIDA_MUX_PC);
 
-  BANCOREG1 : bancoReg
+  REGISTERS : ProcessorRegisters
   PORT MAP(
     CLOCK => CLOCK,
     REG_ADDR => INSTRUCTION_IN(10 DOWNTO 9),
@@ -154,21 +154,21 @@ BEGIN
   );
 
   -- O port map completo do Program Counter.
-  PC : registradorGenerico
+  PC_REGISTER : GenericRegister
   GENERIC MAP(larguraDados => 9)
   PORT MAP(DIN => SAIDA_MUX_PC, DOUT => ENDERECO, ENABLE => '1', CLK => CLOCK, RST => '0');
 
-  INCREMENTAPC : somaConstante
+  INCREASE_PC : AddConstant
   GENERIC MAP(larguraDados => 9, constante => 1)
   PORT MAP(entrada => ENDERECO, saida => PROX_PC);
 
   -- O port map do registrador de Retorno
-  REGRETORNO : registradorGenerico
+  RETURN_REGISTER : GenericRegister
   GENERIC MAP(larguraDados => 9)
   PORT MAP(DIN => PROX_PC, DOUT => SAIDA_REG_RETORNO, ENABLE => HABILITA_REG_RETORNO, CLK => CLOCK, RST => '0');
 
   -- O port map completo da ULA:
-  ULA1 : ULASomaSub
+  ULA_PROCESSOR : ULA
   GENERIC MAP(larguraDados => 8)
   PORT MAP(
     entradaA => ENTRADA_A_ULA,
@@ -181,19 +181,19 @@ BEGIN
   );
 
   -- O port map do registrador da flagzero
-  REGFLAGZERO : registradorFlag
+  ZERO_FLAG_REGISTER : OneBitRegister
   PORT MAP(DIN => FLAG_ZERO_SAIDA_ULA, DOUT => FLAG_ZERO_SAIDA_REG, ENABLE => HABILITA_FLAG_ZERO, CLK => CLOCK, RST => '0');
 
   -- O port map do registrador da flag greater than
-  REGFLAGGREATER : registradorFlag
+  GREATER_FLAG_REGISTER : OneBitRegister
   PORT MAP(DIN => FLAG_GREATER_SAIDA_ULA, DOUT => FLAG_GREATER_SAIDA_REG, ENABLE => HABILITA_FLAG_GREATER, CLK => CLOCK, RST => '0');
 
   -- O port map do registrador da flag lesser than
-  REGFLAGLESSER : registradorFlag
+  LESSER_FLAG_REGISTER : OneBitRegister
   PORT MAP(DIN => FLAG_LESSER_SAIDA_ULA, DOUT => FLAG_LESSER_SAIDA_REG, ENABLE => HABILITA_FLAG_LESSER, CLK => CLOCK, RST => '0');
 
   -- Decoder
-  DEC : decoderGeneric
+  INSTRUCTION_DECODER : InstructionDecoder
   PORT MAP(
     entrada => INSTRUCTION_IN(15 DOWNTO 11),
     entrada_flag_zero => FLAG_ZERO_SAIDA_REG,

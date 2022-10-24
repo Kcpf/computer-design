@@ -2,7 +2,7 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL; --Soma (esta biblioteca =ieee)
 
-ENTITY somaConstante IS
+ENTITY AddConstant IS
   GENERIC (
     larguraDados : NATURAL := 32;
     constante : NATURAL := 4
@@ -13,7 +13,7 @@ ENTITY somaConstante IS
   );
 END ENTITY;
 
-ARCHITECTURE comportamento OF somaConstante IS
+ARCHITECTURE arch OF AddConstant IS
 BEGIN
   saida <= STD_LOGIC_VECTOR(unsigned(entrada) + constante);
 END ARCHITECTURE;

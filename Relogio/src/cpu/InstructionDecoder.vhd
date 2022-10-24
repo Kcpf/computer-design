@@ -1,7 +1,7 @@
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 
-ENTITY decoderGeneric IS
+ENTITY InstructionDecoder IS
   PORT (
     entrada : IN STD_LOGIC_VECTOR(4 DOWNTO 0) := (OTHERS => '0');
     entrada_flag_zero : IN STD_LOGIC := '0';
@@ -11,7 +11,7 @@ ENTITY decoderGeneric IS
   );
 END ENTITY;
 
-ARCHITECTURE comportamento OF decoderGeneric IS
+ARCHITECTURE comportamento OF InstructionDecoder IS
 
   CONSTANT NOP : STD_LOGIC_VECTOR(4 DOWNTO 0) := "00000";
   CONSTANT LDA : STD_LOGIC_VECTOR(4 DOWNTO 0) := "00001";
@@ -29,11 +29,6 @@ ARCHITECTURE comportamento OF decoderGeneric IS
   CONSTANT JLT : STD_LOGIC_VECTOR(4 DOWNTO 0) := "01101";
   CONSTANT JGT : STD_LOGIC_VECTOR(4 DOWNTO 0) := "01110";
 
-  -- saida <= soma when (seletor = "00") else
-  --          subtracao when (seletor = "01") else
-  --          entradaB when (seletor = "10") else
-  --          entradaA;
-
   -- 13 Hab Flag Less Than
   -- 12 Hab Flag Greater Than
   -- 11 None - Hab escrita retorno
@@ -47,6 +42,7 @@ ARCHITECTURE comportamento OF decoderGeneric IS
   -- 2 Hab Flag Zero
   -- 1 RD
   -- 0 WR
+
 BEGIN
   saida <= "00000000000000" WHEN entrada = NOP ELSE
     "00000000110010" WHEN entrada = LDA ELSE
@@ -64,4 +60,5 @@ BEGIN
     "00000010000000" WHEN (entrada = JLT AND entrada_flag_lesser = '1') ELSE
     "00000010000000" WHEN (entrada = JGT AND entrada_flag_greater = '1') ELSE
     "00000000000000"; -- NOP para os entradas Indefinidas
+
 END ARCHITECTURE;

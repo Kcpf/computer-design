@@ -1,7 +1,7 @@
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 
-ENTITY edgeDetector IS
+ENTITY EdgeDetector IS
   PORT (
     clk : IN STD_LOGIC := '0';
     entrada : IN STD_LOGIC := '0';
@@ -9,7 +9,7 @@ ENTITY edgeDetector IS
   );
 END ENTITY;
 
-ARCHITECTURE bordaSubida OF edgeDetector IS
+ARCHITECTURE bordaSubida OF EdgeDetector IS
   SIGNAL saidaQ : STD_LOGIC;
 BEGIN
   PROCESS (clk)

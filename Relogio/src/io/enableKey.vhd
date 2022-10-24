@@ -1,7 +1,7 @@
 LIBRARY IEEE;
 USE ieee.std_logic_1164.ALL;
 
-ENTITY enableKey IS
+ENTITY EnableKey IS
   PORT (
     CLK : IN STD_LOGIC := '0';
     KEY_3_0 : IN STD_LOGIC_VECTOR(3 DOWNTO 0) := (OTHERS => '0');
@@ -21,17 +21,9 @@ ENTITY enableKey IS
   );
 END ENTITY;
 
-ARCHITECTURE comportamento OF enableKey IS
+ARCHITECTURE arch OF EnableKey IS
 
-  COMPONENT buffer_3_state_1porta
-    PORT (
-      entrada : IN STD_LOGIC;
-      habilita : IN STD_LOGIC;
-      saida : OUT STD_LOGIC
-    );
-  END COMPONENT;
-
-  COMPONENT barramentoKey
+  COMPONENT KeyBus
     PORT (
       KEY_IN : IN STD_LOGIC;
       HAB_KEY : IN STD_LOGIC;
@@ -39,7 +31,7 @@ ARCHITECTURE comportamento OF enableKey IS
     );
   END COMPONENT;
 
-  COMPONENT edgeDetector
+  COMPONENT EdgeDetector
     PORT (
       clk : IN STD_LOGIC;
       entrada : IN STD_LOGIC;
@@ -47,7 +39,7 @@ ARCHITECTURE comportamento OF enableKey IS
     );
   END COMPONENT;
 
-  COMPONENT registradorFlag
+  COMPONENT OneBitRegister
     PORT (
       DIN : IN STD_LOGIC;
       DOUT : OUT STD_LOGIC;
@@ -73,49 +65,49 @@ ARCHITECTURE comportamento OF enableKey IS
 
 BEGIN
 
-  BARRAMENTO_KEY0 : barramentoKey
+  KEY0_BUS : KeyBus
   PORT MAP(
     KEY_IN => KEY_0_REG,
     HAB_KEY => HAB_KEY_3_0(0),
     KEY_OUT => OUT_KEY_0
   );
 
-  BARRAMENTO_KEY1 : barramentoKey
+  KEY1_BUS : KeyBus
   PORT MAP(
     KEY_IN => KEY_1_REG,
     HAB_KEY => HAB_KEY_3_0(1),
     KEY_OUT => OUT_KEY_1
   );
 
-  BARRAMENTO_KEY2 : barramentoKey
+  KEY2_BUS : KeyBus
   PORT MAP(
     KEY_IN => KEY_2_REG,
     HAB_KEY => HAB_KEY_3_0(2),
     KEY_OUT => OUT_KEY_2
   );
 
-  BARRAMENTO_KEY3 : barramentoKey
+  KEY3_BUS : KeyBus
   PORT MAP(
     KEY_IN => KEY_3_REG,
     HAB_KEY => HAB_KEY_3_0(3),
     KEY_OUT => OUT_KEY_3
   );
 
-  BARRAMENTO_KEY_RESET : barramentoKey
+  KEY_RESET_BUS : KeyBus
   PORT MAP(
     KEY_IN => KEY_RESET_REG,
     HAB_KEY => HAB_KEY_RESET,
     KEY_OUT => OUT_KEY_RESET
   );
 
-  EDGE_0 : edgeDetector
+  EDGE_0 : EdgeDetector
   PORT MAP(
     clk => CLK,
     entrada => NOT(KEY_3_0(0)),
     saida => KEY_0_EDGE
   );
 
-  FF_KEY_0 : registradorFlag
+  FF_KEY_0 : OneBitRegister
   PORT MAP(
     DIN => '1',
     DOUT => KEY_0_REG,
@@ -124,14 +116,14 @@ BEGIN
     RST => HAB_LIMPA_0
   );
 
-  EDGE_1 : edgeDetector
+  EDGE_1 : EdgeDetector
   PORT MAP(
     clk => CLK,
     entrada => NOT(KEY_3_0(1)),
     saida => KEY_1_EDGE
   );
 
-  FF_KEY_1 : registradorFlag
+  FF_KEY_1 : OneBitRegister
   PORT MAP(
     DIN => '1',
     DOUT => KEY_1_REG,
@@ -140,14 +132,14 @@ BEGIN
     RST => HAB_LIMPA_1
   );
 
-  EDGE_2 : edgeDetector
+  EDGE_2 : EdgeDetector
   PORT MAP(
     clk => CLK,
     entrada => NOT(KEY_3_0(2)),
     saida => KEY_2_EDGE
   );
 
-  FF_KEY_2 : registradorFlag
+  FF_KEY_2 : OneBitRegister
   PORT MAP(
     DIN => '1',
     DOUT => KEY_2_REG,
@@ -156,14 +148,14 @@ BEGIN
     RST => HAB_LIMPA_2
   );
 
-  EDGE_3 : edgeDetector
+  EDGE_3 : EdgeDetector
   PORT MAP(
     clk => CLK,
     entrada => NOT(KEY_3_0(3)),
     saida => KEY_3_EDGE
   );
 
-  FF_KEY_3 : registradorFlag
+  FF_KEY_3 : OneBitRegister
   PORT MAP(
     DIN => '1',
     DOUT => KEY_3_REG,
@@ -172,14 +164,14 @@ BEGIN
     RST => HAB_LIMPA_3
   );
 
-  EDGE_RESET : edgeDetector
+  EDGE_RESET : EdgeDetector
   PORT MAP(
     clk => CLK,
     entrada => NOT(KEY_RESET),
     saida => KEY_RESET_EDGE
   );
 
-  FF_KEY_RESET : registradorFlag
+  FF_KEY_RESET : OneBitRegister
   PORT MAP(
     DIN => '1',
     DOUT => KEY_RESET_REG,

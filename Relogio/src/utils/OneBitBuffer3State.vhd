@@ -1,7 +1,7 @@
 LIBRARY IEEE;
 USE ieee.std_logic_1164.ALL;
 
-ENTITY buffer_3_state_1porta IS
+ENTITY OneBitBuffer3State IS
   PORT (
     entrada : IN STD_LOGIC := '0';
     habilita : IN STD_LOGIC := '0';
@@ -9,7 +9,7 @@ ENTITY buffer_3_state_1porta IS
   );
 END ENTITY;
 
-ARCHITECTURE comportamento OF buffer_3_state_1porta IS
+ARCHITECTURE arch OF OneBitBuffer3State IS
 BEGIN
   -- A saida esta ativa quando o habilita = 1.
   saida <= 'Z' WHEN (habilita = '0') ELSE

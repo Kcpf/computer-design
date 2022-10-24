@@ -1,7 +1,7 @@
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 
-ENTITY addrDecoder IS
+ENTITY IOAddressDecoder IS
   PORT (
     ENTRADA : IN STD_LOGIC_VECTOR(8 DOWNTO 0) := (OTHERS => '0');
     RD : IN STD_LOGIC := '0';
@@ -24,9 +24,9 @@ ENTITY addrDecoder IS
   );
 END ENTITY;
 
-ARCHITECTURE comportamento OF addrDecoder IS
+ARCHITECTURE arch OF IOAddressDecoder IS
 
-  COMPONENT decoder3x8
+  COMPONENT Decoder3x8
     PORT (
       entrada : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
       saida : OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
@@ -42,13 +42,13 @@ ARCHITECTURE comportamento OF addrDecoder IS
   SIGNAL DECODER_ENDERECO_OUT : STD_LOGIC_VECTOR(7 DOWNTO 0);
 
 BEGIN
-  DECODER_BLOCO : decoder3x8
+  DECODER_BLOCO : Decoder3x8
   PORT MAP(
     entrada => DECODER_BLOCO_IN,
     saida => DECODER_BLOCO_OUT
   );
 
-  DECODER_ENDERECO : decoder3x8
+  DECODER_ENDERECO : Decoder3x8
   PORT MAP(
     entrada => DECODER_ENDERECO_IN,
     saida => DECODER_ENDERECO_OUT

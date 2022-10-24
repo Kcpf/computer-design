@@ -1,7 +1,7 @@
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 
-ENTITY muxGenerico4x1 IS
+ENTITY GenericMux4x1 IS
   -- Total de bits das entradas e saidas
   GENERIC (larguraDados : NATURAL := 8);
   PORT (
@@ -11,7 +11,7 @@ ENTITY muxGenerico4x1 IS
   );
 END ENTITY;
 
-ARCHITECTURE comportamento OF muxGenerico4x1 IS
+ARCHITECTURE arch OF GenericMux4x1 IS
 BEGIN
   saida_MUX <= entradaD_MUX WHEN (seletor_MUX = "11") ELSE
     entradaC_MUX WHEN (seletor_MUX = "10") ELSE

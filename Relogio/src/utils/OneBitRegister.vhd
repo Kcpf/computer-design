@@ -1,7 +1,7 @@
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 
-ENTITY registradorFlag IS
+ENTITY OneBitRegister IS
   PORT (
     DIN : IN STD_LOGIC := '0';
     DOUT : OUT STD_LOGIC := '0';
@@ -10,7 +10,7 @@ ENTITY registradorFlag IS
   );
 END ENTITY;
 
-ARCHITECTURE comportamento OF registradorFlag IS
+ARCHITECTURE arch OF OneBitRegister IS
 BEGIN
   -- In Altera devices, register signals have a set priority.
   -- The HDL design should reflect this priority.
