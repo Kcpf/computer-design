@@ -35,18 +35,17 @@ ARCHITECTURE assincrona OF ROM IS
   FUNCTION initMemory
     RETURN blocoMemoria IS VARIABLE tmp : blocoMemoria := (OTHERS => (OTHERS => '0'));
   BEGIN
-    -- SETUP:
-    tmp(0) := LDI & "00" & "000000001"; -- LDI %R0, 1
-    tmp(1) := STA & "00" & "000000000"; -- STA %R0, @0
-    tmp(2) := LDI & "01" & "000000010"; -- LDI %R1, 2
-    tmp(3) := SOMA & "01" & "000000000"; -- SOMA %R1, @0
-    tmp(4) := CGT & "01" & "000000000"; -- CGT %R1, @0
-    tmp(5) := JGT & "00" & "000001000"; -- JGT @0
-    tmp(6) := LDI & "01" & "000001001"; -- LDI %R1, 0
-    tmp(7) := SOMA & "01" & "000000000"; -- SOMA %R1, @0
+    tmp(0) := "00100" & "00" & "000000001"; -- LDI %R0, $1
+    tmp(1) := "00101" & "00" & "000000000"; -- STA %R0, @0
+    tmp(2) := "00100" & "01" & "000000010"; -- LDI %R1, $2
+    tmp(3) := "00010" & "01" & "000000000"; -- SOMA %R1, @0
+    tmp(4) := "01011" & "01" & "000000000"; -- CLT %R1, @0
+    tmp(5) := "01101" & "00" & "000001000"; -- JLT @SAMPAS
+    tmp(6) := "00100" & "01" & "000001001"; -- LDI %R1, $9
+    tmp(7) := "00010" & "01" & "000000000"; -- SOMA %R1, @0
 
-    tmp(8) := NOP & "00" & "000000000"; -- NOP
-
+    -- SAMPAS:
+    tmp(8) := "00000" & "00" & "000000000"; -- NOP
     RETURN tmp;
   END initMemory;
 

@@ -1,0 +1,11 @@
+LDI %R0, $1
+STA %R0, @0
+LDI %R1, $2
+SOMA %R1, @0
+CLT %R1, @0
+JLT @SAMPAS
+LDI %R1, $9
+SOMA %R1, @0
+
+SAMPAS:
+  NOP

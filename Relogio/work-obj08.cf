@@ -1,76 +1,76 @@
 v 4
-file . "src/TopLevel.vhd" "bdd4572fece23da51431d9ca97b160c8a135b905" "20221024203949.626":
-  entity toplevel at 1( 0) + 0 on 107;
-  architecture arch of toplevel at 25( 923) + 0 on 108;
-file . "src/ROM.vhd" "8fb5c6af2c22eba71a3ebe8764866ba4208a3cfd" "20221024203949.612":
-  entity rom at 1( 0) + 0 on 105;
-  architecture assincrona of rom at 16( 343) + 0 on 106;
-file . "src/RAM.vhd" "2300b09caaf8d53a5642bfc708b3eecb04019397" "20221024203949.592":
-  entity ram at 1( 0) + 0 on 103;
-  architecture rtl of ram at 20( 520) + 0 on 104;
-file . "src/CPU.vhd" "43af98dbde9299583ea56e4d60a74880b3058846" "20221024203949.554":
-  entity cpu at 1( 0) + 0 on 101;
-  architecture arch of cpu at 16( 503) + 0 on 102;
-file . "src/io/KeyBus.vhd" "046dc2bd5e3840410fa8f19b152f7cac63b930c4" "20221024203949.189":
-  entity keybus at 1( 0) + 0 on 77;
-  architecture arch of keybus at 12( 190) + 0 on 78;
-file . "src/io/IOAddressDecoder.vhd" "64264662efe3ed7238f7c6af36918b1265932b20" "20221024203949.180":
-  entity ioaddressdecoder at 1( 0) + 0 on 75;
-  architecture arch of ioaddressdecoder at 27( 903) + 0 on 76;
-file . "src/io/Hex7SegConverter.vhd" "bbdafc77c9cc085dce69fe7e4f1039289c3abee9" "20221024203949.165":
-  entity hex7segconverter at 1( 0) + 0 on 73;
-  architecture arch of hex7segconverter at 16( 367) + 0 on 74;
-file . "src/io/EnableSwitch.vhd" "b7e7eda14e783a0da1dbd7ac2f14420dbd69ab14" "20221024203949.154":
-  entity enableswitch at 1( 0) + 0 on 71;
-  architecture arch of enableswitch at 18( 514) + 0 on 72;
-file . "src/io/EnableKey.vhd" "a6958e267cad0d1629dbd630bbc794a85598027d" "20221024203949.145":
-  entity enablekey at 1( 0) + 0 on 69;
-  architecture arch of enablekey at 24( 883) + 0 on 70;
-file . "src/io/DisplayHex.vhd" "98fb4f0b2e7ad406d7783d71b976d610f1e33b35" "20221024203949.134":
-  entity displayhex at 1( 0) + 0 on 67;
-  architecture comportamento of displayhex at 18( 601) + 0 on 68;
-file . "src/cpu/InstructionDecoder.vhd" "a1409148970ea622795c6d8554fe25af0fd00989" "20221024203948.952":
-  entity instructiondecoder at 1( 0) + 0 on 61;
-  architecture comportamento of instructiondecoder at 14( 371) + 0 on 62;
-file . "src/cpu/ProcessorRegisters.vhd" "6637e2ac066abec18df7f0c1a030603cf741fa1b" "20221024203948.966":
-  entity processorregisters at 1( 0) + 0 on 63;
-  architecture arch of processorregisters at 14( 369) + 0 on 64;
-file . "src/cpu/ULA.vhd" "72e8d6c094f33c7768e85f2bc04cac4b261590a1" "20221024203949.001":
-  entity ula at 1( 0) + 0 on 65;
-  architecture arch of ula at 17( 576) + 0 on 66;
-file . "src/utils/AddConstant.vhd" "86a49a62b46af2b728df3404488b1ff15fdf8b59" "20221024203949.345":
-  entity addconstant at 1( 0) + 0 on 79;
-  architecture arch of addconstant at 16( 394) + 0 on 80;
-file . "src/utils/Decoder3x8.vhd" "fa808385cfd7ed13a91b58b84a9e1a47a02f4f3e" "20221024203949.353":
-  entity decoder3x8 at 1( 0) + 0 on 81;
-  architecture comportamento of decoder3x8 at 11( 207) + 0 on 82;
-file . "src/utils/EdgeDetector.vhd" "a264a73ea3b987b1a0212dcae34f6c71166fd7c9" "20221024203949.363":
-  entity edgedetector at 1( 0) + 0 on 83;
-  architecture bordasubida of edgedetector at 12( 193) + 0 on 84;
-file . "src/utils/EightBitBuffer3State.vhd" "4af58e72bf33f07e30dac2c31a74ac77da19d755" "20221024203949.370":
-  entity eightbitbuffer3state at 1( 0) + 0 on 85;
-  architecture arch of eightbitbuffer3state at 12( 268) + 0 on 86;
-file . "src/utils/GenericDMux1x4.vhd" "e15f03b2629bb60e3316f0b33079ea61241e0eeb" "20221024203949.377":
-  entity genericdmux1x4 at 1( 0) + 0 on 87;
-  architecture comportamento of genericdmux1x4 at 14( 463) + 0 on 88;
-file . "src/utils/GenericMux2x1.vhd" "2e2bc365aebeecdef7127730f8eb4dcb2d1857bb" "20221024203949.383":
-  entity genericmux2x1 at 1( 0) + 0 on 89;
-  architecture arch of genericmux2x1 at 14( 403) + 0 on 90;
-file . "src/utils/GenericMux4x1.vhd" "84bfd5ba438ac4b1a4655e070d2cb7089f8155ef" "20221024203949.391":
-  entity genericmux4x1 at 1( 0) + 0 on 91;
-  architecture arch of genericmux4x1 at 14( 462) + 0 on 92;
-file . "src/utils/GenericRegister.vhd" "33e808c2a34ed1212891e81f7070e6ee276ce362" "20221024203949.397":
-  entity genericregister at 1( 0) + 0 on 93;
-  architecture arch of genericregister at 16( 371) + 0 on 94;
-file . "src/utils/OneBitBuffer3State.vhd" "3a190b732690ddd542886c041dfc3a25076dd2db" "20221024203949.403":
-  entity onebitbuffer3state at 1( 0) + 0 on 95;
-  architecture arch of onebitbuffer3state at 12( 204) + 0 on 96;
-file . "src/utils/OneBitDMux.vhd" "ffd434200dfb3c1c2b6f9dd6c9b6986c816f8e06" "20221024203949.410":
-  entity onebitdmux at 1( 0) + 0 on 97;
-  architecture comportamento of onebitdmux at 13( 308) + 0 on 98;
-file . "src/utils/OneBitRegister.vhd" "af102d21f3e03620d038e8e5ea59d0ae42215cbf" "20221024203949.416":
-  entity onebitregister at 1( 0) + 0 on 99;
-  architecture arch of onebitregister at 13( 229) + 0 on 100;
-file . "test/TopLevel_tb.vhd" "aec08e96fffd68791c81da8dce37f953bb408f6c" "20221024203949.758":
-  entity toplevel_tb at 1( 0) + 0 on 109;
-  architecture test of toplevel_tb at 7( 84) + 0 on 110;
+file . "src/TopLevel.vhd" "bdd4572fece23da51431d9ca97b160c8a135b905" "20221024212445.540":
+  entity toplevel at 1( 0) + 0 on 307;
+  architecture arch of toplevel at 25( 923) + 0 on 308;
+file . "src/ROM.vhd" "2213ec754411dd06e68bc6a46656be7b27767bb1" "20221024212445.525":
+  entity rom at 1( 0) + 0 on 305;
+  architecture assincrona of rom at 16( 343) + 0 on 306;
+file . "src/RAM.vhd" "2300b09caaf8d53a5642bfc708b3eecb04019397" "20221024212445.504":
+  entity ram at 1( 0) + 0 on 303;
+  architecture rtl of ram at 20( 520) + 0 on 304;
+file . "src/CPU.vhd" "43af98dbde9299583ea56e4d60a74880b3058846" "20221024212445.463":
+  entity cpu at 1( 0) + 0 on 301;
+  architecture arch of cpu at 16( 503) + 0 on 302;
+file . "src/io/KeyBus.vhd" "046dc2bd5e3840410fa8f19b152f7cac63b930c4" "20221024212445.088":
+  entity keybus at 1( 0) + 0 on 277;
+  architecture arch of keybus at 12( 190) + 0 on 278;
+file . "src/io/IOAddressDecoder.vhd" "64264662efe3ed7238f7c6af36918b1265932b20" "20221024212445.080":
+  entity ioaddressdecoder at 1( 0) + 0 on 275;
+  architecture arch of ioaddressdecoder at 27( 903) + 0 on 276;
+file . "src/io/Hex7SegConverter.vhd" "bbdafc77c9cc085dce69fe7e4f1039289c3abee9" "20221024212445.064":
+  entity hex7segconverter at 1( 0) + 0 on 273;
+  architecture arch of hex7segconverter at 16( 367) + 0 on 274;
+file . "src/io/EnableSwitch.vhd" "b7e7eda14e783a0da1dbd7ac2f14420dbd69ab14" "20221024212445.052":
+  entity enableswitch at 1( 0) + 0 on 271;
+  architecture arch of enableswitch at 18( 514) + 0 on 272;
+file . "src/io/EnableKey.vhd" "a6958e267cad0d1629dbd630bbc794a85598027d" "20221024212445.044":
+  entity enablekey at 1( 0) + 0 on 269;
+  architecture arch of enablekey at 24( 883) + 0 on 270;
+file . "src/io/DisplayHex.vhd" "98fb4f0b2e7ad406d7783d71b976d610f1e33b35" "20221024212445.032":
+  entity displayhex at 1( 0) + 0 on 267;
+  architecture comportamento of displayhex at 18( 601) + 0 on 268;
+file . "src/cpu/InstructionDecoder.vhd" "a1409148970ea622795c6d8554fe25af0fd00989" "20221024212444.847":
+  entity instructiondecoder at 1( 0) + 0 on 261;
+  architecture comportamento of instructiondecoder at 14( 371) + 0 on 262;
+file . "src/cpu/ProcessorRegisters.vhd" "6637e2ac066abec18df7f0c1a030603cf741fa1b" "20221024212444.861":
+  entity processorregisters at 1( 0) + 0 on 263;
+  architecture arch of processorregisters at 14( 369) + 0 on 264;
+file . "src/cpu/ULA.vhd" "72e8d6c094f33c7768e85f2bc04cac4b261590a1" "20221024212444.897":
+  entity ula at 1( 0) + 0 on 265;
+  architecture arch of ula at 17( 576) + 0 on 266;
+file . "src/utils/AddConstant.vhd" "86a49a62b46af2b728df3404488b1ff15fdf8b59" "20221024212445.246":
+  entity addconstant at 1( 0) + 0 on 279;
+  architecture arch of addconstant at 16( 394) + 0 on 280;
+file . "src/utils/Decoder3x8.vhd" "fa808385cfd7ed13a91b58b84a9e1a47a02f4f3e" "20221024212445.254":
+  entity decoder3x8 at 1( 0) + 0 on 281;
+  architecture comportamento of decoder3x8 at 11( 207) + 0 on 282;
+file . "src/utils/EdgeDetector.vhd" "a264a73ea3b987b1a0212dcae34f6c71166fd7c9" "20221024212445.264":
+  entity edgedetector at 1( 0) + 0 on 283;
+  architecture bordasubida of edgedetector at 12( 193) + 0 on 284;
+file . "src/utils/EightBitBuffer3State.vhd" "4af58e72bf33f07e30dac2c31a74ac77da19d755" "20221024212445.270":
+  entity eightbitbuffer3state at 1( 0) + 0 on 285;
+  architecture arch of eightbitbuffer3state at 12( 268) + 0 on 286;
+file . "src/utils/GenericDMux1x4.vhd" "e15f03b2629bb60e3316f0b33079ea61241e0eeb" "20221024212445.277":
+  entity genericdmux1x4 at 1( 0) + 0 on 287;
+  architecture comportamento of genericdmux1x4 at 14( 463) + 0 on 288;
+file . "src/utils/GenericMux2x1.vhd" "2e2bc365aebeecdef7127730f8eb4dcb2d1857bb" "20221024212445.284":
+  entity genericmux2x1 at 1( 0) + 0 on 289;
+  architecture arch of genericmux2x1 at 14( 403) + 0 on 290;
+file . "src/utils/GenericMux4x1.vhd" "84bfd5ba438ac4b1a4655e070d2cb7089f8155ef" "20221024212445.292":
+  entity genericmux4x1 at 1( 0) + 0 on 291;
+  architecture arch of genericmux4x1 at 14( 462) + 0 on 292;
+file . "src/utils/GenericRegister.vhd" "33e808c2a34ed1212891e81f7070e6ee276ce362" "20221024212445.299":
+  entity genericregister at 1( 0) + 0 on 293;
+  architecture arch of genericregister at 16( 371) + 0 on 294;
+file . "src/utils/OneBitBuffer3State.vhd" "3a190b732690ddd542886c041dfc3a25076dd2db" "20221024212445.305":
+  entity onebitbuffer3state at 1( 0) + 0 on 295;
+  architecture arch of onebitbuffer3state at 12( 204) + 0 on 296;
+file . "src/utils/OneBitDMux.vhd" "ffd434200dfb3c1c2b6f9dd6c9b6986c816f8e06" "20221024212445.312":
+  entity onebitdmux at 1( 0) + 0 on 297;
+  architecture comportamento of onebitdmux at 13( 308) + 0 on 298;
+file . "src/utils/OneBitRegister.vhd" "af102d21f3e03620d038e8e5ea59d0ae42215cbf" "20221024212445.319":
+  entity onebitregister at 1( 0) + 0 on 299;
+  architecture arch of onebitregister at 13( 229) + 0 on 300;
+file . "test/TopLevel_tb.vhd" "aec08e96fffd68791c81da8dce37f953bb408f6c" "20221024212445.677":
+  entity toplevel_tb at 1( 0) + 0 on 309;
+  architecture test of toplevel_tb at 7( 84) + 0 on 310;

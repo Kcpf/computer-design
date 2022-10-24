@@ -10,11 +10,18 @@ class bcolors:
     UNDERLINE = "\033[4m"
 
 
-assembly = "asm_antigo.txt"  # Arquivo de entrada de contem o assembly
+assembly = "ASM.txt"  # Arquivo de entrada de contem o assembly
 destinoBIN = "BIN.txt"  # Arquivo de saída que contem o binário formatado para VHDL
 
 # definição dos mnemônicos e seus
 # respectivo OPCODEs
+
+registers = {
+    "%R0": "00",
+    "%R1": "01",
+    "%R2": "10",
+    "%R3": "11",
+}
 
 mne = {
     "NOP": "00000",
@@ -28,6 +35,10 @@ mne = {
     "CEQ": "01000",
     "JSR": "01001",
     "RET": "01010",
+    "CLT": "01011",
+    "CGT": "01100",
+    "JLT": "01101",
+    "JGT": "01110",
 }
 
 # Tabela com labels e seus respectivos endereços
@@ -44,7 +55,7 @@ def converteArroba(line):
         line[1] = int(line[1])
 
     number_in_9_bits = format(line[1], "09b")
-    line[1] = f'" & "{number_in_9_bits}"'
+    line[1] = f'" & "00" & "{number_in_9_bits}"'
     line = "".join(line)
 
     return line
@@ -55,7 +66,7 @@ def converteArroba(line):
 def converteCifrao(line):
     line = line.split("$")
     number_in_9_bits = format(int(line[1]), "09b")
-    line[1] = f'" & "{number_in_9_bits}"'
+    line[1] = f'" & "00" & "{number_in_9_bits}"'
     line = "".join(line)
     return line
 
@@ -154,37 +165,53 @@ with open(destinoBIN, "w") as f:  # Abre o destino BIN
                 "\n", ""
             )  # Define a instrução. Ex: JSR @14
 
-            instrucaoLine = trataMnemonico(
-                instrucaoLine
-            )  # Trata o mnemonico. Ex(JSR @14): x"9" @14
+            # Verifica se a instrução possui um caractere virgula ','
+            if "," in instrucaoLine:
+                instrucaoLine = instrucaoLine.replace(",", "")  # Remove a virgula
+                instrucaoLine = instrucaoLine.split()  # Divide a instrução em uma lista
+                mnemonico = mne[instrucaoLine[0]]  # Define o mnemônico
+                registrador = registers[instrucaoLine[1]]  # Define o registrador
+                numero = format(int(instrucaoLine[2][1:]), "09b")  # Define o número
 
-            if "@" in instrucaoLine:  # Se encontrar o caractere arroba '@'
-                instrucaoLine = converteArroba(
+                f.write(
+                    f'tmp({str(cont)}) := "{mnemonico}" & "{registrador}" & "{numero}";\t-- {comentarioLine}\n'
+                )  # Escreve no arquivo BIN.txt
+
+                print(
+                    f'{bcolors.OKGREEN}{str(cont)}{bcolors.ENDC}: "{mnemonico}" & "{registrador}" & "{numero}";\t-- {comentarioLine}'
+                )  # Print apenas para debug
+            else:
+                instrucaoLine = trataMnemonico(
                     instrucaoLine
-                )  # converte o número após o caractere Ex(JSR @14): x"9" x"0E"
+                )  # Trata o mnemonico. Ex(JSR @14): x"9" @14
 
-            elif "$" in instrucaoLine:  # Se encontrar o caractere cifrao '$'
-                instrucaoLine = converteCifrao(
-                    instrucaoLine
-                )  # converte o número após o caractere Ex(LDI $5): x"4" x"05"
+                if "@" in instrucaoLine:  # Se encontrar o caractere arroba '@'
+                    instrucaoLine = converteArroba(
+                        instrucaoLine
+                    )  # converte o número após o caractere Ex(JSR @14): x"9" x"0E"
 
-            else:  # Senão, se a instrução nao possuir nenhum imediator, ou seja, nao conter '@' ou '$'
-                instrucaoLine = instrucaoLine.replace(
-                    "\n", ""
-                )  # Remove a quebra de linha
-                number_in_9_bits = format(0, "09b")
-                instrucaoLine = f'{instrucaoLine}" & "{number_in_9_bits}"'  # Acrescenta o valor x"00". Ex(RET): x"A" x"00"
+                elif "$" in instrucaoLine:  # Se encontrar o caractere cifrao '$'
+                    instrucaoLine = converteCifrao(
+                        instrucaoLine
+                    )  # converte o número após o caractere Ex(LDI $5): x"4" x"05"
 
-            # Formata para o arquivo BIN
-            # Entrada => 1. JSR @14 #comentario1
-            # Saída =>   1. tmp(0) := x"90E";	-- JSR @14 	#comentario1
+                else:  # Senão, se a instrução nao possuir nenhum imediator, ou seja, nao conter '@' ou '$'
+                    instrucaoLine = instrucaoLine.replace(
+                        "\n", ""
+                    )  # Remove a quebra de linha
+                    number_in_9_bits = format(0, "09b")
+                    instrucaoLine = f'{instrucaoLine}" & "00" & "{number_in_9_bits}"'  # Acrescenta o valor x"00". Ex(RET): x"A" x"00"
 
-            f.write(
-                f'tmp({str(cont)}) := "{instrucaoLine};\t-- {comentarioLine}\n'
-            )  # Escreve no arquivo BIN.txt
+                # Formata para o arquivo BIN
+                # Entrada => 1. JSR @14 #comentario1
+                # Saída =>   1. tmp(0) := x"90E";	-- JSR @14 	#comentario1
 
-            print(
-                f'{bcolors.OKGREEN}{str(cont)}{bcolors.ENDC}: "{instrucaoLine}; \t-- {comentarioLine}'
-            )  # Print apenas para debug
+                f.write(
+                    f'tmp({str(cont)}) := "{instrucaoLine};\t-- {comentarioLine}\n'
+                )  # Escreve no arquivo BIN.txt
+
+                print(
+                    f'{bcolors.OKGREEN}{str(cont)}{bcolors.ENDC}: "{instrucaoLine}; \t-- {comentarioLine}'
+                )  # Print apenas para debug
 
             cont += 1  # Incrementa a variável de contagem, utilizada para incrementar as posições de memória no VHDL
