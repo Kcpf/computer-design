@@ -1,3 +1,4 @@
+ghdl -a --std=08 src/clock/*.vhd
 ghdl -a --std=08 src/cpu/*.vhd
 ghdl -a --std=08 src/io/*.vhd
 ghdl -a --std=08 src/utils/*.vhd

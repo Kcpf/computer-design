@@ -20,7 +20,6 @@ ARCHITECTURE assincrona OF ROM IS
   FUNCTION initMemory
     RETURN blocoMemoria IS VARIABLE tmp : blocoMemoria := (OTHERS => (OTHERS => '0'));
   BEGIN
-
     -- SETUP:
     tmp(0) := "00100" & "00" & "000000000"; -- LDI %R0, $0
     tmp(1) := "00101" & "00" & "100000000"; -- STA %R0, @256
@@ -46,10 +45,10 @@ ARCHITECTURE assincrona OF ROM IS
     tmp(21) := "00101" & "01" & "000000100"; -- STA %R1, @4
 
     -- LOOP:
-    tmp(22) := "00001" & "00" & "101100000"; -- LDA %R0, @352
+    tmp(22) := "00001" & "00" & "101100101"; -- LDA %R0, @357
     tmp(23) := "01000" & "00" & "000000000"; -- CEQ %R0, @0
     tmp(24) := "00100" & "00" & "000000001"; -- LDI %R0, $1
-    tmp(25) := "00101" & "00" & "111111111"; -- STA %R0, @511
+    tmp(25) := "00101" & "00" & "111111010"; -- STA %R0, @506
     tmp(26) := "00111" & "00" & "000011100"; -- JEQ @DISPLAY
     tmp(27) := "01001" & "00" & "000101111"; -- JSR @INCREMENTO
 
@@ -108,6 +107,7 @@ ARCHITECTURE assincrona OF ROM IS
     tmp(71) := "00101" & "00" & "000000110"; -- STA %R0, @6
     tmp(72) := "00101" & "00" & "000000111"; -- STA %R0, @7
     tmp(73) := "01010" & "00" & "000000000"; -- RET
+
     RETURN tmp;
   END initMemory;
 

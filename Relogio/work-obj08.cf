@@ -1,76 +1,82 @@
 v 4
-file . "test/TopLevel_tb.vhd" "aec08e96fffd68791c81da8dce37f953bb408f6c" "20221024223826.330":
-  entity toplevel_tb at 1( 0) + 0 on 1629;
-  architecture test of toplevel_tb at 7( 84) + 0 on 1630;
-file . "src/utils/OneBitRegister.vhd" "af102d21f3e03620d038e8e5ea59d0ae42215cbf" "20221024223825.967":
-  entity onebitregister at 1( 0) + 0 on 1619;
-  architecture arch of onebitregister at 13( 229) + 0 on 1620;
-file . "src/utils/OneBitDMux.vhd" "ffd434200dfb3c1c2b6f9dd6c9b6986c816f8e06" "20221024223825.959":
-  entity onebitdmux at 1( 0) + 0 on 1617;
-  architecture comportamento of onebitdmux at 13( 308) + 0 on 1618;
-file . "src/utils/OneBitBuffer3State.vhd" "3a190b732690ddd542886c041dfc3a25076dd2db" "20221024223825.952":
-  entity onebitbuffer3state at 1( 0) + 0 on 1615;
-  architecture arch of onebitbuffer3state at 12( 204) + 0 on 1616;
-file . "src/utils/GenericRegister.vhd" "33e808c2a34ed1212891e81f7070e6ee276ce362" "20221024223825.945":
-  entity genericregister at 1( 0) + 0 on 1613;
-  architecture arch of genericregister at 16( 371) + 0 on 1614;
-file . "src/utils/GenericMux4x1.vhd" "84bfd5ba438ac4b1a4655e070d2cb7089f8155ef" "20221024223825.936":
-  entity genericmux4x1 at 1( 0) + 0 on 1611;
-  architecture arch of genericmux4x1 at 14( 462) + 0 on 1612;
-file . "src/utils/GenericMux2x1.vhd" "2e2bc365aebeecdef7127730f8eb4dcb2d1857bb" "20221024223825.929":
-  entity genericmux2x1 at 1( 0) + 0 on 1609;
-  architecture arch of genericmux2x1 at 14( 403) + 0 on 1610;
-file . "src/utils/GenericDMux1x4.vhd" "e15f03b2629bb60e3316f0b33079ea61241e0eeb" "20221024223825.923":
-  entity genericdmux1x4 at 1( 0) + 0 on 1607;
-  architecture comportamento of genericdmux1x4 at 14( 463) + 0 on 1608;
-file . "src/utils/EightBitBuffer3State.vhd" "4af58e72bf33f07e30dac2c31a74ac77da19d755" "20221024223825.916":
-  entity eightbitbuffer3state at 1( 0) + 0 on 1605;
-  architecture arch of eightbitbuffer3state at 12( 268) + 0 on 1606;
-file . "src/utils/EdgeDetector.vhd" "a264a73ea3b987b1a0212dcae34f6c71166fd7c9" "20221024223825.909":
-  entity edgedetector at 1( 0) + 0 on 1603;
-  architecture bordasubida of edgedetector at 12( 193) + 0 on 1604;
-file . "src/utils/Decoder3x8.vhd" "fa808385cfd7ed13a91b58b84a9e1a47a02f4f3e" "20221024223825.900":
-  entity decoder3x8 at 1( 0) + 0 on 1601;
-  architecture comportamento of decoder3x8 at 11( 207) + 0 on 1602;
-file . "src/utils/AddConstant.vhd" "86a49a62b46af2b728df3404488b1ff15fdf8b59" "20221024223825.891":
-  entity addconstant at 1( 0) + 0 on 1599;
-  architecture arch of addconstant at 16( 394) + 0 on 1600;
-file . "src/cpu/ULA.vhd" "2b1a5a97c1d79c8b5ee3c826eaec8638265345dd" "20221024223825.547":
-  entity ula at 1( 0) + 0 on 1585;
-  architecture arch of ula at 17( 576) + 0 on 1586;
-file . "src/cpu/ProcessorRegisters.vhd" "6637e2ac066abec18df7f0c1a030603cf741fa1b" "20221024223825.511":
-  entity processorregisters at 1( 0) + 0 on 1583;
-  architecture arch of processorregisters at 14( 369) + 0 on 1584;
-file . "src/cpu/InstructionDecoder.vhd" "75c17ba9bde45616fee7810c1df9853bf3653718" "20221024223825.497":
-  entity instructiondecoder at 1( 0) + 0 on 1581;
-  architecture comportamento of instructiondecoder at 14( 371) + 0 on 1582;
-file . "src/io/DisplayHex.vhd" "98fb4f0b2e7ad406d7783d71b976d610f1e33b35" "20221024223825.681":
-  entity displayhex at 1( 0) + 0 on 1587;
-  architecture comportamento of displayhex at 18( 601) + 0 on 1588;
-file . "src/io/EnableKey.vhd" "a6958e267cad0d1629dbd630bbc794a85598027d" "20221024223825.694":
-  entity enablekey at 1( 0) + 0 on 1589;
-  architecture arch of enablekey at 24( 883) + 0 on 1590;
-file . "src/io/EnableSwitch.vhd" "b7e7eda14e783a0da1dbd7ac2f14420dbd69ab14" "20221024223825.703":
-  entity enableswitch at 1( 0) + 0 on 1591;
-  architecture arch of enableswitch at 18( 514) + 0 on 1592;
-file . "src/io/Hex7SegConverter.vhd" "bbdafc77c9cc085dce69fe7e4f1039289c3abee9" "20221024223825.715":
-  entity hex7segconverter at 1( 0) + 0 on 1593;
-  architecture arch of hex7segconverter at 16( 367) + 0 on 1594;
-file . "src/io/IOAddressDecoder.vhd" "64264662efe3ed7238f7c6af36918b1265932b20" "20221024223825.730":
-  entity ioaddressdecoder at 1( 0) + 0 on 1595;
-  architecture arch of ioaddressdecoder at 27( 903) + 0 on 1596;
-file . "src/io/KeyBus.vhd" "046dc2bd5e3840410fa8f19b152f7cac63b930c4" "20221024223825.739":
-  entity keybus at 1( 0) + 0 on 1597;
-  architecture arch of keybus at 12( 190) + 0 on 1598;
-file . "src/CPU.vhd" "a78f41c06d7d14dde50db1b51db56d0ec93029b5" "20221024223826.102":
-  entity cpu at 1( 0) + 0 on 1621;
-  architecture arch of cpu at 16( 503) + 0 on 1622;
-file . "src/RAM.vhd" "2300b09caaf8d53a5642bfc708b3eecb04019397" "20221024223826.140":
-  entity ram at 1( 0) + 0 on 1623;
-  architecture rtl of ram at 20( 520) + 0 on 1624;
-file . "src/ROM.vhd" "4f68317b43ea6dd6579831f72ed03845a952e49b" "20221024223826.182":
-  entity rom at 1( 0) + 0 on 1625;
-  architecture assincrona of rom at 16( 343) + 0 on 1626;
-file . "src/TopLevel.vhd" "bdd4572fece23da51431d9ca97b160c8a135b905" "20221024223826.198":
-  entity toplevel at 1( 0) + 0 on 1627;
-  architecture arch of toplevel at 25( 923) + 0 on 1628;
+file . "src/io/enableSwitch.vhd" "b7e7eda14e783a0da1dbd7ac2f14420dbd69ab14" "20221026014354.409":
+  entity enableswitch at 1( 0) + 0 on 1909;
+  architecture arch of enableswitch at 18( 514) + 0 on 1910;
+file . "src/io/enableKey.vhd" "a6958e267cad0d1629dbd630bbc794a85598027d" "20221026014354.407":
+  entity enablekey at 1( 0) + 0 on 1907;
+  architecture arch of enablekey at 24( 883) + 0 on 1908;
+file . "src/io/displayHex.vhd" "98fb4f0b2e7ad406d7783d71b976d610f1e33b35" "20221026014354.405":
+  entity displayhex at 1( 0) + 0 on 1905;
+  architecture comportamento of displayhex at 18( 601) + 0 on 1906;
+file . "test/TopLevel_tb.vhd" "19ef26d43c50e96cdf262b63d0a8037e1acee5b0" "20221026014354.462":
+  entity toplevel_tb at 1( 0) + 0 on 1941;
+  architecture test of toplevel_tb at 7( 84) + 0 on 1942;
+file . "src/utils/OneBitRegister.vhd" "af102d21f3e03620d038e8e5ea59d0ae42215cbf" "20221026014354.433":
+  entity onebitregister at 1( 0) + 0 on 1927;
+  architecture arch of onebitregister at 13( 229) + 0 on 1928;
+file . "src/utils/OneBitDMux.vhd" "ffd434200dfb3c1c2b6f9dd6c9b6986c816f8e06" "20221026014354.432":
+  entity onebitdmux at 1( 0) + 0 on 1925;
+  architecture comportamento of onebitdmux at 13( 308) + 0 on 1926;
+file . "src/utils/OneBitBuffer3State.vhd" "3a190b732690ddd542886c041dfc3a25076dd2db" "20221026014354.431":
+  entity onebitbuffer3state at 1( 0) + 0 on 1923;
+  architecture arch of onebitbuffer3state at 12( 204) + 0 on 1924;
+file . "src/utils/GenericRegister.vhd" "33e808c2a34ed1212891e81f7070e6ee276ce362" "20221026014354.430":
+  entity genericregister at 1( 0) + 0 on 1921;
+  architecture arch of genericregister at 16( 371) + 0 on 1922;
+file . "src/utils/GenericMux4x1.vhd" "84bfd5ba438ac4b1a4655e070d2cb7089f8155ef" "20221026014354.429":
+  entity genericmux4x1 at 1( 0) + 0 on 1919;
+  architecture arch of genericmux4x1 at 14( 462) + 0 on 1920;
+file . "src/utils/GenericMux2x1.vhd" "2e2bc365aebeecdef7127730f8eb4dcb2d1857bb" "20221026014354.427":
+  entity genericmux2x1 at 1( 0) + 0 on 1917;
+  architecture arch of genericmux2x1 at 14( 403) + 0 on 1918;
+file . "src/utils/GenericDMux1x4.vhd" "e15f03b2629bb60e3316f0b33079ea61241e0eeb" "20221026014354.426":
+  entity genericdmux1x4 at 1( 0) + 0 on 1915;
+  architecture comportamento of genericdmux1x4 at 14( 463) + 0 on 1916;
+file . "src/utils/EightBitBuffer3State.vhd" "4af58e72bf33f07e30dac2c31a74ac77da19d755" "20221026014354.425":
+  entity eightbitbuffer3state at 1( 0) + 0 on 1913;
+  architecture arch of eightbitbuffer3state at 12( 268) + 0 on 1914;
+file . "src/utils/AddConstant.vhd" "86a49a62b46af2b728df3404488b1ff15fdf8b59" "20221026014354.424":
+  entity addconstant at 1( 0) + 0 on 1911;
+  architecture arch of addconstant at 16( 394) + 0 on 1912;
+file . "src/cpu/ULA.vhd" "2b1a5a97c1d79c8b5ee3c826eaec8638265345dd" "20221026014354.388":
+  entity ula at 1( 0) + 0 on 1897;
+  architecture arch of ula at 17( 576) + 0 on 1898;
+file . "src/cpu/ProcessorRegisters.vhd" "6637e2ac066abec18df7f0c1a030603cf741fa1b" "20221026014354.381":
+  entity processorregisters at 1( 0) + 0 on 1895;
+  architecture arch of processorregisters at 14( 369) + 0 on 1896;
+file . "src/cpu/InstructionDecoder.vhd" "75c17ba9bde45616fee7810c1df9853bf3653718" "20221026014354.379":
+  entity instructiondecoder at 1( 0) + 0 on 1893;
+  architecture comportamento of instructiondecoder at 14( 371) + 0 on 1894;
+file . "src/io/Hex7SegConverter.vhd" "bbdafc77c9cc085dce69fe7e4f1039289c3abee9" "20221026014354.399":
+  entity hex7segconverter at 1( 0) + 0 on 1899;
+  architecture arch of hex7segconverter at 16( 367) + 0 on 1900;
+file . "src/io/IOAddressDecoder.vhd" "fa5c8fca7b3dd129f3a346ca7cbb147f70b0cbbf" "20221026014354.402":
+  entity ioaddressdecoder at 1( 0) + 0 on 1901;
+  architecture arch of ioaddressdecoder at 29( 989) + 0 on 1902;
+file . "src/io/KeyBus.vhd" "046dc2bd5e3840410fa8f19b152f7cac63b930c4" "20221026014354.403":
+  entity keybus at 1( 0) + 0 on 1903;
+  architecture arch of keybus at 12( 190) + 0 on 1904;
+file . "src/CPU.vhd" "a78f41c06d7d14dde50db1b51db56d0ec93029b5" "20221026014354.445":
+  entity cpu at 1( 0) + 0 on 1933;
+  architecture arch of cpu at 16( 503) + 0 on 1934;
+file . "src/RAM.vhd" "2300b09caaf8d53a5642bfc708b3eecb04019397" "20221026014354.449":
+  entity ram at 1( 0) + 0 on 1935;
+  architecture rtl of ram at 20( 520) + 0 on 1936;
+file . "src/ROM.vhd" "f258e88c1053e3a7d26a7be2b8dada3e722a34b5" "20221026014354.454":
+  entity rom at 1( 0) + 0 on 1937;
+  architecture assincrona of rom at 16( 343) + 0 on 1938;
+file . "src/TopLevel.vhd" "b9964308959921ece9670dbc97b375e757e558fb" "20221026014354.456":
+  entity toplevel at 1( 0) + 0 on 1939;
+  architecture arch of toplevel at 25( 923) + 0 on 1940;
+file . "src/utils/decoder3x8.vhd" "fa808385cfd7ed13a91b58b84a9e1a47a02f4f3e" "20221026014354.434":
+  entity decoder3x8 at 1( 0) + 0 on 1929;
+  architecture comportamento of decoder3x8 at 11( 207) + 0 on 1930;
+file . "src/utils/edgeDetector.vhd" "a264a73ea3b987b1a0212dcae34f6c71166fd7c9" "20221026014354.435":
+  entity edgedetector at 1( 0) + 0 on 1931;
+  architecture bordasubida of edgedetector at 12( 193) + 0 on 1932;
+file . "src/clock/ClockInterface.vhd" "c3167b86f91ca92ed115ead97a3e71addb69f773" "20221026014354.366":
+  entity clockinterface at 1( 0) + 0 on 1889;
+  architecture interface of clockinterface at 14( 271) + 0 on 1890;
+file . "src/clock/GenericDivisor.vhd" "b53df0b4751e06bd1e82a5eea17fd9656b109fb3" "20221026014354.368":
+  entity genericdivisor at 1( 0) + 0 on 1891;
+  architecture arch of genericdivisor at 15( 326) + 0 on 1892;

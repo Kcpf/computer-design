@@ -30,12 +30,11 @@ SETUP:
   LDI %R1, $24
   STA %R1, @4
 
-
 LOOP:
-  LDA %R0, @352
+  LDA %R0, @357
   CEQ %R0, @0
   LDI %R0, $1
-  STA %R0, @511
+  STA %R0, @506
   JEQ @DISPLAY
   JSR @INCREMENTO
 

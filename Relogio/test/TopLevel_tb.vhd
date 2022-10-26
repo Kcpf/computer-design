@@ -40,7 +40,7 @@ ARCHITECTURE test OF TopLevel_tb IS
   SIGNAL hex4_vector : STD_LOGIC_VECTOR(6 DOWNTO 0) := (OTHERS => '0');
   SIGNAL hex5_vector : STD_LOGIC_VECTOR(6 DOWNTO 0) := (OTHERS => '0');
 
-  CONSTANT PERIODO : TIME := 10 ns;
+  CONSTANT PERIODO : TIME := 10 ps;
 
 BEGIN
 
@@ -66,29 +66,5 @@ BEGIN
   );
 
   clock <= NOT clock AFTER PERIODO / 2;
-
-  main : PROCESS BEGIN
-
-    key_vector <= "1111";
-
-    WAIT FOR 170 ns;
-
-    key_vector <= "0000";
-
-    WAIT FOR 10 ns;
-
-    key_vector <= "1111";
-
-    WAIT FOR 170 ns;
-
-    key_vector <= "0000";
-
-    WAIT FOR 10 ns;
-
-    key_vector <= "1111";
-
-    WAIT;
-
-  END PROCESS;
 
 END test;
