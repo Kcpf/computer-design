@@ -19,8 +19,8 @@ ARCHITECTURE test OF TopLevel_tb IS
   END COMPONENT;
 
   SIGNAL clock : STD_LOGIC := '0';
-  SIGNAL ponto_seletor : STD_LOGIC := '0';
-  SIGNAL ponto_escreve_c : STD_LOGIC := '0';
+  SIGNAL ponto_seletor : STD_LOGIC := '1';
+  SIGNAL ponto_escreve_c : STD_LOGIC := '1';
 
   CONSTANT PERIODO : TIME := 10 ps;
 
@@ -39,7 +39,6 @@ BEGIN
   );
 
   clock <= NOT clock AFTER PERIODO / 2;
-  ponto_seletor <= '1';
-  ponto_escreve_c <= '1';
+  ponto_seletor <= NOT ponto_seletor AFTER 15 ps;
 
 END test;

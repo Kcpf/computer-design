@@ -10,7 +10,7 @@ ENTITY TopLevel IS
   PORT (
     CLOCK_50 : IN STD_LOGIC := '0';
     PONTO_SELETOR : IN STD_LOGIC := '0';
-    PONTO_ESCREVE_C : IN STD_LOGIC := '0';
+    PONTO_ESCREVE_C : IN STD_LOGIC := '0'
   );
 END ENTITY;
 ARCHITECTURE arch OF TopLevel IS
@@ -92,16 +92,16 @@ BEGIN
 
   PC_REGISTER : GenericRegister
   GENERIC MAP(larguraDados => 32)
-  PORT MAP(DIN => PROX_PC, DOUT => ENDERECO_ROM, ENABLE => '1', CLK => CLOCK, RST => '0');
+  PORT MAP(DIN => PROX_PC, DOUT => ENDERECO_ROM, ENABLE => '1', CLK => CLOCK_50, RST => '0');
 
   INCREASE_PC : AddConstant
-  GENERIC MAP(larguraDados => 32, constante => 1)
+  GENERIC MAP(larguraDados => 32, constante => 4)
   PORT MAP(entrada => ENDERECO_ROM, saida => PROX_PC);
 
   BancoReg : ProcessorRegisters
   GENERIC MAP(larguraDados => 32, larguraEndBancoRegs => 5)
   PORT MAP(
-    clk => CLOCK,
+    clk => CLOCK_50,
     enderecoA => SAIDA_ROM(4 DOWNTO 0),
     enderecoB => SAIDA_ROM(9 DOWNTO 5),
     enderecoC => SAIDA_ROM(14 DOWNTO 10),
@@ -112,7 +112,7 @@ BEGIN
   );
 
   ULA_PROCESSOR : ULA
-  GENERIC MAP(larguraDados => 8)
+  GENERIC MAP(larguraDados => 32)
   PORT MAP(
     entradaA => SAIDA_A,
     entradaB => SAIDA_B,
