@@ -3,6 +3,9 @@ USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
 ENTITY ClockInterface IS
+  GENERIC (
+    divisor : NATURAL := 25000000
+  );
   PORT (
     clk : IN STD_LOGIC;
     habilitaLeitura : IN STD_LOGIC;
@@ -44,7 +47,7 @@ ARCHITECTURE interface OF ClockInterface IS
 BEGIN
 
   baseTempo : GenericDivisor
-  GENERIC MAP(divisor => 5) -- divide por 10.
+  GENERIC MAP(divisor => divisor) -- divide por 10.
   PORT MAP(
     clk => clk,
     saida_clk => saidaclk_reg1seg
@@ -61,12 +64,5 @@ BEGIN
 
   leituraUmSegundo <= "0000000" & sinalUmSegundo WHEN habilitaLeitura = '1' ELSE
     (OTHERS => 'Z');
-
-  -- ONIBUS : KeyBus
-  -- PORT MAP(
-  --   KEY_IN => sinalUmSegundo,
-  --   HAB_KEY => habilitaLeitura,
-  --   KEY_OUT => leituraUmSegundo
-  -- );
 
 END ARCHITECTURE interface;

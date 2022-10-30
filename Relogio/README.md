@@ -22,13 +22,18 @@ RET - Return from Subroutine
 RAM:
   MEM[0] = Constante 0
   MEM[1] = Constante 1
-  MEM[2] = Constante 10
-  MEM[3] = Constante 60
-  MEM[4] = Constante 24
+  MEM[2] = Constante 2
+  MEM[3] = Constante 4
+  MEM[4] = Constante 6
+  MEM[5] = Constante 10
 
-  MEM[5] = Segundos
-  MEM[6] = Minutos
-  MEM[7] = Horas
+  MEM[6] = Segundos Unidade
+  MEM[7] = Segundos Decimal
+  MEM[8] = Minutos Unidade
+  MEM[9] = Minutos Decimal
+  MEM[10] = Horas Unidade
+  MEM[11] = Horas Decimal
+  MEM[12] = Flag Rapido
 
 LEDR:
   MEM[256] = LEDR0 - LEDR7
@@ -54,8 +59,12 @@ KEY:
   MEM[354] = KEY2
   MEM[355] = KEY3
   MEM[356] = FPGA_RESET
+  MEM[357] = RELOGIO 1S
+  MEM[358] = RELOGIO 1S FAST
 
-LIMPA KEY:
+LIMPA:
+  MEM[505] = Limpa RELOGIO 1S FAST
+  MEM[506] = Limpa RELOGIO 1S
   MEM[507] = Limpa FPGA_RESET
   MEM[508] = Limpa KEY3
   MEM[509] = Limpa KEY2
