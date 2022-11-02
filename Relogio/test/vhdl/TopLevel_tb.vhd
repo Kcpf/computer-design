@@ -16,7 +16,6 @@ ARCHITECTURE test OF TopLevel_tb IS
       KEY : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
       FPGA_RESET_N : IN STD_LOGIC;
       SW : IN STD_LOGIC_VECTOR(9 DOWNTO 0);
-      DATA_TEST : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
       LEDR : OUT STD_LOGIC_VECTOR(9 DOWNTO 0);
       HEX0 : OUT STD_LOGIC_VECTOR(6 DOWNTO 0);
       HEX1 : OUT STD_LOGIC_VECTOR(6 DOWNTO 0);
@@ -55,7 +54,6 @@ BEGIN
     KEY => key_vector,
     FPGA_RESET_N => fpga_reset,
     SW => sw_vector,
-    DATA_TEST => data_test,
     LEDR => ledr_vector,
     HEX0 => hex0_vector,
     HEX1 => hex1_vector,
