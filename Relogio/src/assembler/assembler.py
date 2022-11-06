@@ -76,9 +76,9 @@ def converteCifrao(line):
 # Define a string que representa o comentário
 # a partir do caractere cerquilha '#'
 def defineComentario(line):
-    if "#" in line:
-        line = line.split("#")
-        line = line[0] + "\t#" + line[1]
+    if "//" in line:
+        line = line.split("//")
+        line = line[0] + "\t//" + line[1]
         return line
     else:
         return line
@@ -87,7 +87,7 @@ def defineComentario(line):
 # Remove o comentário a partir do caractere cerquilha '#',
 # deixando apenas a instrução
 def defineInstrucao(line):
-    line = line.split("#")
+    line = line.split("//")
     line = line[0]
     return line
 
