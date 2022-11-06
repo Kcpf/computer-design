@@ -30,15 +30,22 @@ SETUP:
   STA %R0, @2
 
   LDI %R0, $4
-  STA %R0, $3
+  STA %R0, @3
 
   LDI %R0, $6
-  STA %R0, $4
+  STA %R0, @4
 
   LDI %R0, $10
-  STA %R0, $5
+  STA %R0, @5
 
-  JSR @CONFIGURA_RELOGIO
+  LDI %R0, $9
+  STA %R0, @14
+
+  LDI %R0, $5
+  STA %R0, @15
+
+  LDI %R0, $3
+  STA %R0, @16
 
 LOOP:
   LDA %R0, @353
@@ -212,6 +219,11 @@ CONFIGURA_RELOGIO:
   CONFIGURA_SEG_UNI:
 
     LDA %R0, @320
+    CLT %R0, @5
+    JLT @SEG_UNI_MENOR_10
+    LDA %R0, @14
+
+    SEG_UNI_MENOR_10:
     STA %R0, @6
     STA %R0, @256
 
@@ -224,6 +236,11 @@ CONFIGURA_RELOGIO:
 
   CONFIGURA_RELOGIO_SEG_DEC:
     LDA %R0, @320
+    CLT %R0, @4
+    JLT @SEG_DEC_MENOR_6
+    LDA %R0, @15
+
+    SEG_DEC_MENOR_6:
     STA %R0, @7
     STA %R0, @256
 
@@ -236,6 +253,11 @@ CONFIGURA_RELOGIO:
 
   CONFIGURA_RELOGIO_MIN_UNI:
     LDA %R0, @320
+    CLT %R0, @5
+    JLT @MIN_UNI_MENOR_10
+    LDA %R0, @14
+
+    MIN_UNI_MENOR_10:
     STA %R0, @8
     STA %R0, @256
 
@@ -248,6 +270,11 @@ CONFIGURA_RELOGIO:
 
   CONFIGURA_RELOGIO_MIN_DEC:
     LDA %R0, @320
+    CLT %R0, @4
+    JLT @MIN_DEC_MENOR_6
+    LDA %R0, @15
+
+    MIN_DEC_MENOR_6:
     STA %R0, @9
     STA %R0, @256
 
@@ -260,6 +287,11 @@ CONFIGURA_RELOGIO:
 
   CONFIGURA_RELOGIO_HORA_UNI:
     LDA %R0, @320
+    CLT %R0, @5
+    JLT @HORA_UNI_MENOR_10
+    LDA %R0, @14
+
+    HORA_UNI_MENOR_10:
     STA %R0, @10
     STA %R0, @256
 
@@ -271,7 +303,23 @@ CONFIGURA_RELOGIO:
   STA %R0, @510
 
   CONFIGURA_RELOGIO_HORA_DEC:
+    LDA %R1, @10
+    CGT %R1, @16
+    JGT @HORA_DEC_MAIOR_4
+
     LDA %R0, @320
+    CLT %R0, @16
+    JLT @HORA_UNI_MENOR_2
+    LDA %R0, @2
+    JMP @HORA_UNI_MENOR_2
+
+    HORA_DEC_MAIOR_4:
+    LDA %R0, @320
+    CLT %R0, @2
+    JLT @HORA_UNI_MENOR_2
+    LDA %R0, @1
+
+    HORA_UNI_MENOR_2:
     STA %R0, @11
     STA %R0, @256
 

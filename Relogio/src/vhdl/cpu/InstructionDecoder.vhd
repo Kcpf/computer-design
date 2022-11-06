@@ -61,6 +61,7 @@ BEGIN
     "100000000001010" WHEN entrada = CLT ELSE
     "010000000001010" WHEN entrada = CGT ELSE
     "000000100000000" WHEN (entrada = JLT AND entrada_flag_lesser = '1') ELSE
+    "000000100000000" WHEN (entrada = JGT AND entrada_flag_greater = '1') ELSE
     "000000001100010" WHEN entrada = ANDD ELSE
     "000000001101010" WHEN entrada = ORRR ELSE
     "000000000000000"; -- NOP para os entradas Indefinidas

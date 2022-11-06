@@ -14,6 +14,12 @@ JEQ - Jump if Equal
 CEQ - Compare if Equal
 JSR - Jump to Subroutine
 RET - Return from Subroutine
+CLT - Compare if Less Than
+CGT - Compare if Greater Than
+JLT - Jump if Less Than
+JGT - Jump if Greater Than
+AND - Logical AND
+OR - Logical OR
 ```
 
 ## Mapa de memória
@@ -34,6 +40,10 @@ RAM:
   MEM[10] = Horas Unidade
   MEM[11] = Horas Decimal
   MEM[12] = Flag Rapido
+
+  MEM[14] = Constante 9
+  MEM[15] = Constante 5
+  MEM[16] = Constante 3
 
 LEDR:
   MEM[256] = LEDR0 - LEDR7
