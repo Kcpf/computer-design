@@ -1,0 +1,333 @@
+SETUP:
+  LDI %R0, $0
+
+  STA %R0, @256
+  STA %R0, @257
+  STA %R0, @258
+
+  STA %R0, @288
+  STA %R0, @289
+  STA %R0, @290
+  STA %R0, @291
+  STA %R0, @292
+  STA %R0, @293
+
+  STA %R0, @0
+
+  STA %R0, @6
+  STA %R0, @7
+  STA %R0, @8
+  STA %R0, @9
+  STA %R0, @10
+  STA %R0, @11
+
+  STA %R0, @12
+
+  LDI %R0, $1
+  STA %R0, @1
+
+  LDI %R0, $2
+  STA %R0, @2
+
+  LDI %R0, $4
+  STA %R0, @3
+
+  LDI %R0, $6
+  STA %R0, @4
+
+  LDI %R0, $10
+  STA %R0, @5
+
+  LDI %R0, $9
+  STA %R0, @14
+
+  LDI %R0, $5
+  STA %R0, @15
+
+  LDI %R0, $3
+  STA %R0, @16
+
+LOOP:
+  LDA %R0, @353
+  CEQ %R0, @0
+  JEQ @VERIFICA_FLAG_RAPIDO
+  JSR @CONFIGURA_RELOGIO
+
+  VERIFICA_FLAG_RAPIDO: 
+    LDA %R0, @352
+    CEQ %R0, @0
+    JEQ @INICIO_LOOP
+    JSR @TROCA_BASE
+
+  INICIO_LOOP:
+    LDA %R0, @12
+    CEQ %R0, @1
+    JEQ @RELOGIO_RAPIDO
+    LDA %R0, @357
+    CEQ %R0, @0
+    JEQ @DISPLAY
+    JSR @INCREMENTO
+    JMP @DISPLAY
+
+  RELOGIO_RAPIDO:
+    LDA %R0, @358
+    CEQ %R0, @0
+    JEQ @DISPLAY
+    JSR @INCREMENTO
+
+  DISPLAY:
+    // Segundos Unidade
+    LDA %R0, @6
+    STA %R0, @288
+
+    // Segundos Dezena
+    LDA %R1, @7
+    STA %R1, @289
+
+    // Minutos Unidade
+    LDA %R0, @8
+    STA %R0, @290
+
+    // Minutos Dezena
+    LDA %R1, @9
+    STA %R1, @291
+
+    // Horas Unidade
+    LDA %R0, @10
+    STA %R0, @292
+
+    // Horas Dezena
+    LDA %R1, @11
+    STA %R1, @293
+
+  JMP @LOOP
+
+
+INCREMENTO:
+  LDA %R0, @12
+  CEQ %R0, @1
+  JEQ @LIMPA_RELOGIO_RAPIDO
+  LDI %R0, $1
+  STA %R0, @506
+  JMP @INCREMENTO_INICIO
+
+  LIMPA_RELOGIO_RAPIDO:
+    LDI %R0, $1
+    STA %R0, @505
+
+  INCREMENTO_INICIO:
+    LDA %R0, @6
+    SOMA %R0, @1
+    CEQ %R0, @5
+    JEQ @INCREMENTA_SEGUNDO_DEC
+    STA %R0, @6
+    RET
+
+  INCREMENTA_SEGUNDO_DEC:
+    LDI %R0, $0
+    STA %R0, @6
+    LDA %R0, @7
+    SOMA %R0, @1
+    CEQ %R0, @4
+    JEQ @INCREMENTA_MINUTO
+    STA %R0, @7
+    RET
+
+  INCREMENTA_MINUTO:
+    LDI %R0, $0
+    STA %R0, @7
+    LDA %R0, @8
+    SOMA %R0, @1
+    CEQ %R0, @5
+    JEQ @INCREMENTA_MINUTO_DEC
+    STA %R0, @8
+    RET
+
+  INCREMENTA_MINUTO_DEC:
+    LDI %R0, $0
+    STA %R0, @8
+    LDA %R0, @9
+    SOMA %R0, @1
+    CEQ %R0, @4
+    JEQ @INCREMENTA_HORA
+    STA %R0, @9
+    RET
+
+  INCREMENTA_HORA:
+    LDI %R0, $0
+    STA %R0, @9
+
+    LDA %R0, @11
+    CEQ %R0, @2
+    JEQ @INCREMENTO_OVERFLOW
+
+    LDA %R0, @10
+    SOMA %R0, @1
+    CEQ %R0, @5
+    JEQ @INCREMENTO_HORA_DEC
+    STA %R0, @10
+    RET
+
+  INCREMENTO_HORA_DEC:
+    LDI %R0, $0
+    STA %R0, @10
+    LDA %R0, @11
+    SOMA %R0, @1
+    STA %R0, @11
+    RET
+
+  INCREMENTO_OVERFLOW:
+    LDA %R0, $10
+    SOMA %R0, @1
+    CEQ %R0, @3
+    JEQ @INCREMENTO_RESET
+    STA %R0, @10
+    RET
+
+  INCREMENTO_RESET:
+    LDA %R0, @0
+    STA %R0, @6
+    STA %R0, @7
+    STA %R0, @8
+    STA %R0, @9
+    STA %R0, @10
+    STA %R0, @11
+
+  RET
+
+TROCA_BASE:
+  LDA %R0, @1
+  STA %R0, @511
+
+  LDA %R0, @12
+  CEQ %R0, @1
+  JEQ @VIRA_0
+  LDA %R0, @1
+  STA %R0, @12
+  RET
+
+  VIRA_0:
+    LDA %R0, @0
+    STA %R0, @12
+  
+  RET
+
+CONFIGURA_RELOGIO:
+  LDA %R0, @1
+  STA %R0, @510
+
+  CONFIGURA_SEG_UNI:
+
+    LDA %R0, @320
+    CLT %R0, @5
+    JLT @SEG_UNI_MENOR_10
+    LDA %R0, @14
+
+    SEG_UNI_MENOR_10:
+    STA %R0, @6
+    STA %R0, @256
+
+    LDA %R0, @353
+    CEQ %R0, @0
+    JEQ @CONFIGURA_SEG_UNI
+
+  LDA %R0, @1
+  STA %R0, @510
+
+  CONFIGURA_RELOGIO_SEG_DEC:
+    LDA %R0, @320
+    CLT %R0, @4
+    JLT @SEG_DEC_MENOR_6
+    LDA %R0, @15
+
+    SEG_DEC_MENOR_6:
+    STA %R0, @7
+    STA %R0, @256
+
+    LDA %R0, @353
+    CEQ %R0, @0
+    JEQ @CONFIGURA_RELOGIO_SEG_DEC
+
+  LDA %R0, @1
+  STA %R0, @510
+
+  CONFIGURA_RELOGIO_MIN_UNI:
+    LDA %R0, @320
+    CLT %R0, @5
+    JLT @MIN_UNI_MENOR_10
+    LDA %R0, @14
+
+    MIN_UNI_MENOR_10:
+    STA %R0, @8
+    STA %R0, @256
+
+    LDA %R0, @353
+    CEQ %R0, @0
+    JEQ @CONFIGURA_RELOGIO_MIN_UNI
+
+  LDA %R0, @1
+  STA %R0, @510
+
+  CONFIGURA_RELOGIO_MIN_DEC:
+    LDA %R0, @320
+    CLT %R0, @4
+    JLT @MIN_DEC_MENOR_6
+    LDA %R0, @15
+
+    MIN_DEC_MENOR_6:
+    STA %R0, @9
+    STA %R0, @256
+
+    LDA %R0, @353
+    CEQ %R0, @0
+    JEQ @CONFIGURA_RELOGIO_MIN_DEC
+
+  LDA %R0, @1
+  STA %R0, @510
+
+  CONFIGURA_RELOGIO_HORA_UNI:
+    LDA %R0, @320
+    CLT %R0, @5
+    JLT @HORA_UNI_MENOR_10
+    LDA %R0, @14
+
+    HORA_UNI_MENOR_10:
+    STA %R0, @10
+    STA %R0, @256
+
+    LDA %R0, @353
+    CEQ %R0, @0
+    JEQ @CONFIGURA_RELOGIO_HORA_UNI
+
+  LDA %R0, @1
+  STA %R0, @510
+
+  CONFIGURA_RELOGIO_HORA_DEC:
+    LDA %R1, @10
+    CGT %R1, @16
+    JGT @HORA_DEC_MAIOR_4
+
+    LDA %R0, @320
+    CLT %R0, @16
+    JLT @HORA_UNI_MENOR_2
+    LDA %R0, @2
+    JMP @HORA_UNI_MENOR_2
+
+    HORA_DEC_MAIOR_4:
+    LDA %R0, @320
+    CLT %R0, @2
+    JLT @HORA_UNI_MENOR_2
+    LDA %R0, @1
+
+    HORA_UNI_MENOR_2:
+    STA %R0, @11
+    STA %R0, @256
+
+    LDA %R0, @353
+    CEQ %R0, @0
+    JEQ @CONFIGURA_RELOGIO_HORA_DEC
+
+  LDA %R0, @1
+  STA %R0, @510
+
+  RET
