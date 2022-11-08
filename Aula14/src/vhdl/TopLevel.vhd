@@ -13,7 +13,9 @@ ENTITY TopLevel IS
     PONTO_ESCREVE_C : IN STD_LOGIC := '0';
     PONTO_HAB_WRITE : IN STD_LOGIC := '0';
     PONTO_HAB_READ : IN STD_LOGIC := '0';
-    PONTO_HAB_RAM : IN STD_LOGIC := '0'
+    PONTO_HAB_RAM : IN STD_LOGIC := '0';
+    PONTO_MUX_RT_IMEDIATO : IN STD_LOGIC := '0';
+    PONTO_BEQ : IN STD_LOGIC := '0'
   );
 END ENTITY;
 ARCHITECTURE arch OF TopLevel IS
@@ -57,7 +59,8 @@ ARCHITECTURE arch OF TopLevel IS
     PORT (
       entradaA, entradaB : IN STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
       seletor : IN STD_LOGIC;
-      saida : OUT STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0)
+      saida : OUT STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
+      flag_equal : OUT STD_LOGIC
     );
   END COMPONENT;
 
@@ -109,6 +112,35 @@ ARCHITECTURE arch OF TopLevel IS
     );
   END COMPONENT;
 
+  COMPONENT GenericMux2x1
+    GENERIC (larguraDados : NATURAL := 8);
+    PORT (
+      entradaA_MUX, entradaB_MUX : IN STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
+      seletor_MUX : IN STD_LOGIC;
+      saida_MUX : OUT STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0)
+    );
+  END COMPONENT;
+
+  COMPONENT TwoBitShifter
+    GENERIC (
+      dataLength : NATURAL := 8
+    );
+    PORT (
+      DIN : IN STD_LOGIC_VECTOR(dataLength - 1 DOWNTO 0);
+      DOUT : OUT STD_LOGIC_VECTOR(dataLength - 1 DOWNTO 0)
+    );
+  END COMPONENT;
+
+  COMPONENT Adder
+    GENERIC (
+      larguraDados : NATURAL := 32
+    );
+    PORT (
+      entradaA, entradaB : IN STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
+      saida : OUT STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0)
+    );
+  END COMPONENT;
+
   SIGNAL SAIDA_ROM : STD_LOGIC_VECTOR(31 DOWNTO 0);
   SIGNAL ENDERECO_ROM : STD_LOGIC_VECTOR(31 DOWNTO 0);
   SIGNAL PROX_PC : STD_LOGIC_VECTOR(31 DOWNTO 0);
@@ -117,6 +149,12 @@ ARCHITECTURE arch OF TopLevel IS
   SIGNAL SAIDA_ULA : STD_LOGIC_VECTOR(31 DOWNTO 0);
   SIGNAL SAIDA_ESTENDE_SINAL : STD_LOGIC_VECTOR(31 DOWNTO 0);
   SIGNAL SAIDA_RAM : STD_LOGIC_VECTOR(31 DOWNTO 0);
+
+  SIGNAL ENTRADA_B_ULA : STD_LOGIC_VECTOR(31 DOWNTO 0);
+  SIGNAL FLAG_EQUAL_ULA : STD_LOGIC;
+  SIGNAL SAIDA_BITSHIFT_IMEDIATO : STD_LOGIC_VECTOR(31 DOWNTO 0);
+  SIGNAL SAIDA_ADDER_BEQ : STD_LOGIC_VECTOR(31 DOWNTO 0);
+  SIGNAL SAIDA_SOMA_CONSTANTE_PC : STD_LOGIC_VECTOR(31 DOWNTO 0);
 
 BEGIN
   ROM_MEM : ROM
@@ -129,7 +167,7 @@ BEGIN
 
   INCREASE_PC : AddConstant
   GENERIC MAP(larguraDados => 32, constante => 4)
-  PORT MAP(entrada => ENDERECO_ROM, saida => PROX_PC);
+  PORT MAP(entrada => ENDERECO_ROM, saida => SAIDA_SOMA_CONSTANTE_PC);
 
   ESTENDE : estendeSinalGenerico
   GENERIC MAP(larguraDadoEntrada => 16, larguraDadoSaida => 32)
@@ -160,13 +198,47 @@ BEGIN
     saidaB => SAIDA_B
   );
 
+  ADDER_BEQ : Adder
+  GENERIC MAP(larguraDados => 32)
+  PORT MAP(
+    entradaA => SAIDA_SOMA_CONSTANTE_PC,
+    entradaB => SAIDA_BITSHIFT_IMEDIATO,
+    saida => SAIDA_ADDER_BEQ
+  );
+
+  BIT_SHIFT_IMEDIATO : TwoBitShifter
+  GENERIC MAP(dataLength => 32)
+  PORT MAP(
+    DIN => SAIDA_ESTENDE_SINAL,
+    DOUT => SAIDA_BITSHIFT_IMEDIATO
+  );
+
+  MUX_BEQ : GenericMux2x1
+  GENERIC MAP(larguraDados => 32)
+  PORT MAP(
+    entradaA_MUX => SAIDA_SOMA_CONSTANTE_PC,
+    entradaB_MUX => SAIDA_ADDER_BEQ,
+    seletor_MUX => FLAG_EQUAL_ULA AND PONTO_BEQ,
+    saida_MUX => PROX_PC
+  );
+
+  MUX_ENTRADA_B_ULA : GenericMux2x1
+  GENERIC MAP(larguraDados => 32)
+  PORT MAP(
+    entradaA_MUX => SAIDA_B,
+    entradaB_MUX => SAIDA_ESTENDE_SINAL,
+    seletor_MUX => PONTO_MUX_RT_IMEDIATO,
+    saida_MUX => ENTRADA_B_ULA
+  );
+
   ULA_PROCESSOR : ULA
   GENERIC MAP(larguraDados => 32)
   PORT MAP(
     entradaA => SAIDA_A,
-    entradaB => SAIDA_ESTENDE_SINAL,
+    entradaB => ENTRADA_B_ULA,
     seletor => PONTO_OPERACAO,
-    saida => SAIDA_ULA
+    saida => SAIDA_ULA,
+    flag_equal => FLAG_EQUAL_ULA
   );
 
 END ARCHITECTURE;

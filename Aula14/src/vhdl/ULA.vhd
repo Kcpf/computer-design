@@ -7,7 +7,8 @@ ENTITY ULA IS
   PORT (
     entradaA, entradaB : IN STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0) := (OTHERS => '0');
     seletor : IN STD_LOGIC := '0';
-    saida : OUT STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0) := (OTHERS => '0')
+    saida : OUT STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0) := (OTHERS => '0');
+    flag_equal : OUT STD_LOGIC := '0'
   );
 END ENTITY;
 
@@ -19,4 +20,6 @@ BEGIN
   subtracao <= STD_LOGIC_VECTOR(unsigned(entradaA) - unsigned(entradaB));
   saida <= soma WHEN (seletor = '1') ELSE
     subtracao;
+  flag_equal <= '1' WHEN (entradaA = entradaB) ELSE
+    '0';
 END ARCHITECTURE;

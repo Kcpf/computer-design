@@ -17,7 +17,9 @@ ARCHITECTURE test OF TopLevel_tb IS
       PONTO_ESCREVE_C : IN STD_LOGIC := '0';
       PONTO_HAB_WRITE : IN STD_LOGIC := '0';
       PONTO_HAB_READ : IN STD_LOGIC := '0';
-      PONTO_HAB_RAM : IN STD_LOGIC := '0'
+      PONTO_HAB_RAM : IN STD_LOGIC := '0';
+      PONTO_MUX_RT_IMEDIATO : IN STD_LOGIC := '0';
+      PONTO_BEQ : IN STD_LOGIC := '0'
     );
   END COMPONENT;
 
@@ -27,6 +29,8 @@ ARCHITECTURE test OF TopLevel_tb IS
   SIGNAL ponto_hab_write : STD_LOGIC := '1';
   SIGNAL ponto_hab_read : STD_LOGIC := '0';
   SIGNAL ponto_hab_ram : STD_LOGIC := '1';
+  SIGNAL ponto_mux_rt_imediato : STD_LOGIC := '0';
+  SIGNAL ponto_beq : STD_LOGIC := '0';
 
   CONSTANT PERIODO : TIME := 10 ps;
 
@@ -44,7 +48,9 @@ BEGIN
     PONTO_ESCREVE_C => ponto_escreve_c,
     PONTO_HAB_WRITE => ponto_hab_write,
     PONTO_HAB_READ => ponto_hab_read,
-    PONTO_HAB_RAM => ponto_hab_ram
+    PONTO_HAB_RAM => ponto_hab_ram,
+    PONTO_MUX_RT_IMEDIATO => ponto_mux_rt_imediato,
+    PONTO_BEQ => ponto_beq
   );
 
   clock <= NOT clock AFTER PERIODO / 2;

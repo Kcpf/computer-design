@@ -18,9 +18,14 @@ ARCHITECTURE assincrona OF ROM IS
   FUNCTION initMemory
     RETURN blocoMemoria IS VARIABLE tmp : blocoMemoria := (OTHERS => (OTHERS => '0'));
   BEGIN
-    -- OPCODE & RS & RT & IMMEDIATE
-    tmp(0) := "000000" & "01000" & "01100" & "0000000000010001";
-    tmp(1) := "000000" & "00000" & "01101" & "0000000000010001";
+    -- OPCODE & RS & RT & RD & SHAMT & FUNCT (TIPO R)
+    -- OPCODE & RS & RT & IMMEDIATE (TIPO I)
+    tmp(0) := "000000" & "01000" & "01100" & "0000000000010001"; -- SW T4, @(T0 + 17)
+    tmp(1) := "000000" & "00000" & "01101" & "0000000000010001"; -- LW @(ZERO + 17), T5
+    tmp(2) := "000000" & "01101" & "01100" & "01101" & "00000" & "000000"; -- ADD (T4 + T5), T5
+    tmp(3) := "000000" & "00000" & "01010" & "0000000000010001"; -- LW @(ZERO + 17), T2
+    tmp(4) := "000000" & "00000" & "01011" & "0000000000010001"; -- LW @(ZERO + 17), T3
+    tmp(5) := "000000" & "01010" & "01011" & "1111111111111110";
 
     RETURN tmp;
   END initMemory;
