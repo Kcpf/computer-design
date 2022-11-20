@@ -16,29 +16,15 @@ ARCHITECTURE assincrona OF ROM IS
     RETURN blocoMemoria IS VARIABLE tmp : blocoMemoria := (OTHERS => (OTHERS => '0'));
   BEGIN
 
-    tmp(0) := x"8C0C0000";
-    tmp(1) := x"11090003";
-    tmp(2) := x"11090003";
-    tmp(3) := x"AD0A0000";
-    tmp(4) := x"8C0B0000";
-    tmp(5) := x"114B0002";
-    tmp(6) := x"11090003";
-    tmp(7) := x"11090003";
-    tmp(8) := x"01285820";
-    tmp(9) := x"012B4020";
-    tmp(10) := x"08000008";
+    tmp(0) := x"012A4020";
+    tmp(1) := x"01495820";
+    tmp(2) := x"010B6024";
+    tmp(3) := x"010B6825";
 
-    -- 0    :   8C0C0000;    -- lw   $t4,  0x0($zero)
-    -- 1    :   11090003;    -- beq  $t0, $t1, 0x3
-    -- 2    :   11090003;    -- beq  $t0, $t1, 0x3
-    -- 3    :   AD0A0000;    -- sw   $t2,  0x0($t0)
-    -- 4    :   8C0B0000;    -- lw   $t3,  0x0($zero)
-    -- 5    :   114B0002;    -- beq  $t2, $t3, 0x2
-    -- 6    :   11090003;    -- beq  $t0, $t1, 0x3
-    -- 7    :   11090003;    -- beq  $t0, $t1, 0x3
-    -- 8    :   01285820;    -- add  $t3, $t1, $t0
-    -- 9    :   012B4020;    -- add  $t0, $t1, $t3
-    -- 10   :   08000008;    -- j    0x08
+    -- 0    :   012A4020;    -- add t0, t1, t2
+    -- 1    :   01495820;    -- sub t3, t2, t1
+    -- 1    :   010B6024;    -- and t4, t0, t3
+    -- 1    :   010B6825;    -- or t5, t0, t3
 
     RETURN tmp;
   END initMemory;
