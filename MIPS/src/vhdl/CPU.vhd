@@ -3,20 +3,7 @@ USE ieee.std_logic_1164.ALL;
 
 ENTITY CPU IS
   PORT (
-    CLOCK_50 : IN STD_LOGIC := '0';
-    PONTO_INVERTE_A : IN STD_LOGIC := '0';
-    PONTO_INVERTE_B : IN STD_LOGIC := '0';
-    PONTO_OPERACAO : IN STD_LOGIC_VECTOR(1 DOWNTO 0) := "00";
-    PONTO_CARRY_IN : IN STD_LOGIC := '0';
-    PONTO_ESCREVE_C : IN STD_LOGIC := '0';
-    PONTO_HAB_WRITE : IN STD_LOGIC := '0';
-    PONTO_HAB_READ : IN STD_LOGIC := '0';
-    PONTO_HAB_RAM : IN STD_LOGIC := '0';
-    PONTO_MUX_RT_IMEDIATO : IN STD_LOGIC := '0';
-    PONTO_BEQ : IN STD_LOGIC := '0';
-    PONTO_MUX_RT_RD : IN STD_LOGIC := '0';
-    PONTO_MUX_ALU_RAM : IN STD_LOGIC := '0';
-    PONTO_MUX_JMP : IN STD_LOGIC := '0'
+    CLOCK_50 : IN STD_LOGIC := '0'
   );
 END ENTITY;
 ARCHITECTURE arch OF CPU IS
@@ -108,6 +95,14 @@ ARCHITECTURE arch OF CPU IS
     );
   END COMPONENT;
 
+  COMPONENT MainDecoder
+    PORT (
+      INSTRUCTION : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+      CONTROL_WORD : OUT STD_LOGIC_VECTOR(8 DOWNTO 0);
+      CONTROL_ULA : OUT STD_LOGIC_VECTOR(3 DOWNTO 0)
+    );
+  END COMPONENT;
+
   SIGNAL SAIDA_ROM : STD_LOGIC_VECTOR(31 DOWNTO 0);
   SIGNAL ENDERECO_ROM : STD_LOGIC_VECTOR(31 DOWNTO 0);
   SIGNAL PROX_PC : STD_LOGIC_VECTOR(31 DOWNTO 0);
@@ -126,11 +121,21 @@ ARCHITECTURE arch OF CPU IS
   SIGNAL REG_WRITE_ADDR : STD_LOGIC_VECTOR(4 DOWNTO 0);
   SIGNAL INPUT_DATA_REG_FILE : STD_LOGIC_VECTOR(31 DOWNTO 0);
 
+  SIGNAL CONTROL_WORD : STD_LOGIC_VECTOR(8 DOWNTO 0);
+  SIGNAL CONTROL_ULA : STD_LOGIC_VECTOR(3 DOWNTO 0);
+
 BEGIN
   ROM_MEM : ROM
   PORT MAP(
     Endereco => ENDERECO_ROM,
     Dado => SAIDA_ROM
+  );
+
+  DECODER : MainDecoder
+  PORT MAP(
+    INSTRUCTION => SAIDA_ROM,
+    CONTROL_WORD => CONTROL_WORD,
+    CONTROL_ULA => CONTROL_ULA
   );
 
   PC_REGISTER : PCRegister
@@ -155,9 +160,9 @@ BEGIN
     Endereco => SAIDA_ULA,
     Dado_in => SAIDA_B,
     Dado_out => SAIDA_RAM,
-    we => PONTO_HAB_WRITE,
-    re => PONTO_HAB_READ,
-    habilita => PONTO_HAB_RAM
+    we => CONTROL_WORD(0),
+    re => CONTROL_WORD(1),
+    habilita => '1'
   );
 
   MUX_RT_RD : GenericMux2x1
@@ -165,7 +170,7 @@ BEGIN
   PORT MAP(
     entradaA_MUX => SAIDA_ROM(20 DOWNTO 16),
     entradaB_MUX => SAIDA_ROM(15 DOWNTO 11),
-    seletor_MUX => PONTO_MUX_RT_RD,
+    seletor_MUX => CONTROL_WORD(7),
     saida_MUX => REG_WRITE_ADDR
   );
 
@@ -174,7 +179,7 @@ BEGIN
   PORT MAP(
     entradaA_MUX => SAIDA_ULA,
     entradaB_MUX => SAIDA_RAM,
-    seletor_MUX => PONTO_MUX_ALU_RAM,
+    seletor_MUX => CONTROL_WORD(3),
     saida_MUX => INPUT_DATA_REG_FILE
   );
 
@@ -185,7 +190,7 @@ BEGIN
     REG_B_SEL => SAIDA_ROM(20 DOWNTO 16),
     REG_WRITE_SEL => REG_WRITE_ADDR,
     INPUT_DATA => INPUT_DATA_REG_FILE,
-    WRITE_ENABLE => PONTO_ESCREVE_C,
+    WRITE_ENABLE => CONTROL_WORD(6),
     OUT_A => SAIDA_A,
     OUT_B => SAIDA_B
   );
@@ -202,7 +207,7 @@ BEGIN
   PORT MAP(
     entradaA_MUX => SAIDA_MUX_BEQ,
     entradaB_MUX => SAIDA_SOMA_CONSTANTE_PC(31 DOWNTO 28) & SAIDA_ROM(25 DOWNTO 0) & "00",
-    seletor_MUX => PONTO_MUX_JMP,
+    seletor_MUX => CONTROL_WORD(8),
     saida_MUX => PROX_PC
   );
 
@@ -211,7 +216,7 @@ BEGIN
   PORT MAP(
     entradaA_MUX => SAIDA_SOMA_CONSTANTE_PC,
     entradaB_MUX => SAIDA_ADDER_BEQ,
-    seletor_MUX => FLAG_ZERO_ALU AND PONTO_BEQ,
+    seletor_MUX => FLAG_ZERO_ALU AND CONTROL_WORD(2),
     saida_MUX => SAIDA_MUX_BEQ
   );
 
@@ -220,7 +225,7 @@ BEGIN
   PORT MAP(
     entradaA_MUX => SAIDA_B,
     entradaB_MUX => SAIDA_ESTENDE_SINAL,
-    seletor_MUX => PONTO_MUX_RT_IMEDIATO,
+    seletor_MUX => CONTROL_WORD(5),
     saida_MUX => ENTRADA_B_ULA
   );
 
@@ -228,10 +233,10 @@ BEGIN
   PORT MAP(
     entradaA => SAIDA_A,
     entradaB => ENTRADA_B_ULA,
-    InverteA => PONTO_INVERTE_A,
-    InverteB => PONTO_INVERTE_B,
-    Selecao => PONTO_OPERACAO,
-    CarryIn => PONTO_CARRY_IN,
+    InverteA => CONTROL_ULA(3),
+    InverteB => CONTROL_ULA(2),
+    Selecao => CONTROL_ULA(1 DOWNTO 0),
+    CarryIn => CONTROL_ULA(2),
     Resultado => SAIDA_ULA,
     Zero => FLAG_ZERO_ALU
   );

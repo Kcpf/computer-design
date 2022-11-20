@@ -1,0 +1,28 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL; --Soma (esta biblioteca =ieee)
+
+ENTITY DecoderFunctALU IS
+  PORT (
+    FUNCT : IN STD_LOGIC_VECTOR(5 DOWNTO 0);
+    ULA_CTRL : OUT STD_LOGIC_VECTOR(3 DOWNTO 0)
+  );
+END ENTITY;
+
+ARCHITECTURE arch OF DecoderFunctALU IS
+
+  -- 0000 = AND
+  -- 0001 = OR
+  -- 0010 = ADD
+  -- 0110 = SUB
+  -- 0111 = SLT
+
+BEGIN
+  ULA_CTRL <= "0000" WHEN (FUNCT = "100100") ELSE
+    "0001" WHEN (FUNCT = "100101") ELSE
+    "0010" WHEN (FUNCT = "100000") ELSE
+    "0110" WHEN (FUNCT = "100010") ELSE
+    "0111" WHEN (FUNCT = "101010") ELSE
+    "0000";
+
+END ARCHITECTURE;

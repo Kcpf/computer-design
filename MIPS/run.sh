@@ -1,4 +1,5 @@
 ghdl -a --std=08 src/vhdl/utils/*.vhd
+ghdl -a --std=08 src/vhdl/Decoder/*.vhd
 ghdl -a --std=08 src/vhdl/CPU/ALU/*.vhd
 ghdl -a --std=08 src/vhdl/CPU/*.vhd
 ghdl -a --std=08 src/vhdl/*.vhd

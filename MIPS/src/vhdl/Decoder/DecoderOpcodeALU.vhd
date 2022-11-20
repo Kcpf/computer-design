@@ -1,0 +1,19 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL; --Soma (esta biblioteca =ieee)
+
+ENTITY DecoderOpcodeALU IS
+  PORT (
+    OPCODE : IN STD_LOGIC_VECTOR(5 DOWNTO 0);
+    ULA_CTRL : OUT STD_LOGIC_VECTOR(3 DOWNTO 0)
+  );
+END ENTITY;
+
+ARCHITECTURE arch OF DecoderOpcodeALU IS
+BEGIN
+  ULA_CTRL <= "0010" WHEN (OPCODE = "100011") ELSE
+    "0010" WHEN (OPCODE = "101011") ELSE
+    "0110" WHEN (OPCODE = "000100") ELSE
+    "0000";
+
+END ARCHITECTURE;

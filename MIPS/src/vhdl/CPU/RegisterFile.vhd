@@ -24,11 +24,11 @@ ARCHITECTURE arch OF RegisterFile IS
     BEGIN
         tmp(0) := x"00000000"; -- Nao deve ter efeito.
         tmp(8) := x"00000000"; -- $t0 = 0x00
-        tmp(9) := x"00000001"; -- $t1 = 0x0A
-        tmp(10) := x"00000002"; -- $t2 = 0x0B
-        tmp(11) := x"00000003"; -- $t3 = 0x0C
-        tmp(12) := x"00000004"; -- $t4 = 0x0D
-        tmp(13) := x"00000005"; -- $t5 = 0x16
+        tmp(9) := x"0000000A"; -- $t1 = 0x0A
+        tmp(10) := x"0000000B"; -- $t2 = 0x0B
+        tmp(11) := x"0000000C"; -- $t3 = 0x0C
+        tmp(12) := x"0000000D"; -- $t4 = 0x0D
+        tmp(13) := x"00000016"; -- $t5 = 0x16
 
         RETURN tmp;
     END initMemory;

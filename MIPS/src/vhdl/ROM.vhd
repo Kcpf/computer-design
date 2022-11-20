@@ -16,15 +16,15 @@ ARCHITECTURE assincrona OF ROM IS
     RETURN blocoMemoria IS VARIABLE tmp : blocoMemoria := (OTHERS => (OTHERS => '0'));
   BEGIN
 
-    tmp(0) := x"012A4020";
-    tmp(1) := x"01495820";
-    tmp(2) := x"010B6024";
-    tmp(3) := x"010B6825";
-
-    -- 0    :   012A4020;    -- add t0, t1, t2
-    -- 1    :   01495820;    -- sub t3, t2, t1
-    -- 1    :   010B6024;    -- and t4, t0, t3
-    -- 1    :   010B6825;    -- or t5, t0, t3
+    tmp(0) := x"AC090008";
+    tmp(1) := x"8C080008";
+    tmp(2) := x"012A4022";
+    tmp(3) := x"012A4024";
+    tmp(4) := x"012A4025";
+    tmp(5) := x"012A402A";
+    tmp(6) := x"010A4020";
+    tmp(7) := x"110BFFFE";
+    tmp(8) := x"08000000";
 
     RETURN tmp;
   END initMemory;

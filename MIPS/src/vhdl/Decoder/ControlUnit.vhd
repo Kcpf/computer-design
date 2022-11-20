@@ -1,0 +1,37 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL; --Soma (esta biblioteca =ieee)
+
+ENTITY ControlUnit IS
+  PORT (
+    OPCODE : IN STD_LOGIC_VECTOR(5 DOWNTO 0);
+    CONTROL_WORD : OUT STD_LOGIC_VECTOR(8 DOWNTO 0);
+    TYPE_R : OUT STD_LOGIC
+  );
+END ENTITY;
+
+ARCHITECTURE arch OF ControlUnit IS
+
+  -- CONTROL_WORD SIGNALS
+  -- 8 = MUX_PC+4_BEQ/JMP
+  -- 7 = MUX_RT_RD
+  -- 6 = Hab_Escrita_Reg
+  -- 5 = MUX_RT_Imed	
+  -- 4 = Tipo_R
+  -- 3 = MUX_ULA_MEM
+  -- 2 = BEQ
+  -- 1 = HabLeituraMEM
+  -- 0 = HabEscritaMEM
+
+BEGIN
+  CONTROL_WORD <= "011010000" WHEN (OPCODE = "000000") ELSE
+    "001101010" WHEN (OPCODE = "100011") ELSE
+    "000100001" WHEN (OPCODE = "101011") ELSE
+    "000000100" WHEN (OPCODE = "000100") ELSE
+    "100000000" WHEN (OPCODE = "000010") ELSE
+    "000000000";
+
+  TYPE_R <= '1' WHEN (OPCODE = "000000") ELSE
+    '0';
+
+END ARCHITECTURE;
