@@ -4,12 +4,11 @@ USE ieee.numeric_std.ALL; --Soma (esta biblioteca =ieee)
 
 ENTITY AddConstant IS
     GENERIC (
-        larguraDados : NATURAL := 32;
         constante : NATURAL := 4
     );
     PORT (
-        entrada : IN STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
-        saida : OUT STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0)
+        entrada : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+        saida : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
     );
 END ENTITY;
 
