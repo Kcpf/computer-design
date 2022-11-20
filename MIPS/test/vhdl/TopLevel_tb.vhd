@@ -1,11 +1,11 @@
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 
-ENTITY CPU_tb IS
-END CPU_tb;
+ENTITY TopLevel_tb IS
+END TopLevel_tb;
 
-ARCHITECTURE test OF CPU_tb IS
-  COMPONENT CPU
+ARCHITECTURE test OF TopLevel_tb IS
+  COMPONENT TopLevel
     PORT (
       CLOCK_50 : IN STD_LOGIC := '0'
     );
@@ -17,7 +17,7 @@ ARCHITECTURE test OF CPU_tb IS
 
 BEGIN
 
-  TL : CPU
+  TL : TopLevel
   PORT MAP(
     CLOCK_50 => W_CLK
   );
